@@ -12,13 +12,6 @@ export class Tab1Page {
 
   private balance: number = 0;
   private all_accounts: Account[];
-  private cat:Category = {
-    name:"edc",
-    icon:"ecde",
-    type:"efef",
-    type2:"fdfd",
-    parent:"ffdfd",
-  }
 
   constructor(private service:DatabaseService){
   }
@@ -44,21 +37,23 @@ export class Tab1Page {
 
   doRefresh(event) {
     console.log('Begin async operation refreshing...');
-/*
-    this.service.createAccount("General", 1450, "wallet");ljjjlj
+    /*
+    this.service.createAccount("General", 1450, "wallet");
     this.service.createAccount("Inversiones", 3450, "wallet");
     this.service.createCategory("Comida", "food", "Basico", "Gasto", "Ey");
     this.service.createCategory("Restaurants", "food", "Basico", "Gasto", "Ey");
     this.service.createTransaction("Comida","General", 281);
-*/  
+    */    
+
 
     //-----------------------------------------------------
      
+    /*
     this.service.getAccounts().subscribe(elem => {
       this.all_accounts = elem;
       console.log(this.all_accounts);
       this.getBalance();
-    });
+    });*/
 
     setTimeout(() => {
       console.log('Async refreshing operation has ended');

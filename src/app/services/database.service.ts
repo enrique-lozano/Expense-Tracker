@@ -53,7 +53,14 @@ export class DatabaseService {
   }
   
   public removeAccount(id: string){ 
-    return this.accounts.doc(id).delete();
+    this.getTransactions().subscribe(elem =>{
+      for (var i=0; i<elem.length; i++){
+        if (elem[i].account.name==id){
+          this.transactions.doc(elem[i].id).delete();
+        }
+      }
+      return this.accounts.doc(id).delete();
+    })
   }
 
   /*---------------------------------------------------
@@ -88,7 +95,14 @@ export class DatabaseService {
   }
   
   public removeCategory(id: string){
-    return this.categories.doc(id).delete();
+    this.getTransactions().subscribe(elem =>{
+      for (var i=0; i<elem.length; i++){
+        if (elem[i].category.name==id){
+          this.transactions.doc(elem[i].id).delete();
+        }
+      }
+      return this.categories.doc(id).delete();
+    })
   }
 
   /*---------------------------------------------------
@@ -119,9 +133,8 @@ export class DatabaseService {
           category: y,
           account: x,
           value: value,
-          id: transaction_id
-        };
-        
+          id: transaction_id  //ID-> Primary key
+        };   
         return this.transactions.doc(transaction_id).set(new_transaction);
         });
       
@@ -134,6 +147,14 @@ export class DatabaseService {
   
   public removeTransaction(id: string){
     return this.transactions.doc(id).delete();
+  }
+
+  public removeAllTransactions(){
+    this.getTransactions().subscribe(elem =>{
+      for (var i=0; i<elem.length; i++){
+        this.transactions.doc(elem[i].id).delete();
+      }
+    })
   }
 
 }
