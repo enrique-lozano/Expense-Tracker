@@ -45,7 +45,7 @@ export class Tab1Page {
   doRefresh(event) {
     console.log('Begin async operation refreshing...');
 /*
-    this.service.createAccount("General", 1450, "wallet");
+    this.service.createAccount("General", 1450, "wallet");ljjjlj
     this.service.createAccount("Inversiones", 3450, "wallet");
     this.service.createCategory("Comida", "food", "Basico", "Gasto", "Ey");
     this.service.createCategory("Restaurants", "food", "Basico", "Gasto", "Ey");
