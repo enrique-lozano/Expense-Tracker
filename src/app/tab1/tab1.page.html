@@ -1,17 +1,104 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>
-      Tab 1
+      Bienvenido, Enrique
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="container">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-grid class="intro" fixed="true">
+    <ion-row>
+      <ion-col class="saldo">
+        Saldo en todas las cuentas
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="saldo">
+        <h1>{{balance}} €</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2">
+        <ion-icon name="arrow-up-circle" class="arrow-up"></ion-icon>
+      </ion-col>
+      <ion-col>
+        Ingreso <br> <h4>1373 €</h4>
+      </ion-col>
+      <ion-col size="2" offset="3">
+        <ion-icon name="arrow-down-circle" class="arrow-down"></ion-icon>
+      </ion-col>
+      <ion-col>
+        Gasto <br> <h4>753 €</h4>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <ion-card class="card" fixed="true">
+    <ion-card-header>
+      <ion-card-title>Saldo por cuentas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="account" *ngFor="let account of all_accounts">
+          <ion-col size="3" class="account-details">
+            <ion-icon name="card" class="cuenta" color="primary"></ion-icon>
+          </ion-col>
+          <ion-col size="7" class="account-details">
+            <span class="account-name">{{account.name}}</span> <br>
+            <span class="account-balance">{{account.initial_balance}} €</span> 
+          </ion-col>
+          <ion-col size="2" class="ion-align-self-center">
+            <ion-toggle checked="true"></ion-toggle>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="7">
+          </ion-col>
+          <ion-col size="5">
+            <ion-button color="secondary" class="add-account-button">Añadir cuenta</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card last" fixed="true">
+    <ion-card-header>
+      <ion-card-title>Salud financiera</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="5" class="ion-align-self-center">
+            <span class="healthy-value">70%</span>
+          </ion-col>
+          <ion-col size="7" class="ion-align-self-center">
+            <p class="healthy-text">Lorem ipsum, o voluptas facilis. Dolor quisquam, aperiam debitis recusandae adipisci unde beatae voluptatem minima autem! Fugiat voluptatem necessitatibus ea!</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
