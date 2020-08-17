@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { DatabaseService } from '../services/database.service'
 import { Account, Category } from '../services/interfaces'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -13,7 +14,7 @@ export class Tab1Page {
   private balance: number = 0;
   private all_accounts: Account[];
 
-  constructor(private service:DatabaseService){
+  constructor(private service:DatabaseService, private router: Router){
   }
 
 
@@ -22,17 +23,8 @@ export class Tab1Page {
     this.service.getAccount("Eyy").then((elem) => {
       console.log(elem.initial_balance);
     });
+    */
 
-    this.service.createAccount("Eyy", 1890, "wallet");
-    this.service.removeAccount("Eyy");
-    */
-   /*
-    this.getBalance();   
-    this.service.getAccounts().subscribe(elem => {
-      this.all_accounts = elem;
-      console.log(this.all_accounts);
-    });
-    */
   }
 
   doRefresh(event) {
@@ -70,5 +62,8 @@ export class Tab1Page {
     });
   }
 
-
+  go(url:string){
+    this.router.navigate([url]);
+  }
+  
 }

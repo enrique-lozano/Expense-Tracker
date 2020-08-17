@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add transaction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" scrollY="false">
+
+  <div id="top">
+    <ion-toolbar>
+      <ion-segment value="2">
+        <ion-segment-button value="1" (click)="setGreen()">
+          <ion-label>Ingreso</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="2" (click)="setRed()">
+          <ion-label>Gasto</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="3" (click)="setBlue()">
+          <ion-label>Transfer</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+
+    <div id="value">
+      <span>{{sign}}{{value}}</span>
+    </div>
+    <div class="chooser">
+      <div class="choose">
+        <span class="choose-title">Cuenta</span><br>
+        effdkjd
+      </div>
+      <div class="choose">
+        <span class="choose-title">Categoria</span><br>
+        effdkjd
+      </div>
+    </div>
+  </div>
+
+  <ion-grid>
+    <ion-row *ngFor="let group of buttons" class="calc-row">
+      <ion-col *ngFor="let but of group" (click)="butPress(but)">
+        <div *ngIf="but<10 || but=='.' || but=='AC' || but=='<-'" class="button">
+          <span>{{but}}</span>
+        </div> 
+        <div *ngIf="but=='Cal'" class="button but-darked but-round">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </div> 
+        <div *ngIf="but=='Not'" class="button but-darked">
+          <ion-icon name="create-outline"></ion-icon>
+        </div> 
+        <div *ngIf="but=='FIN'" class="button but-darked">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+        </div>           
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

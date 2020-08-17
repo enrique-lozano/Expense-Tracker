@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="secondary">
     <ion-title>
       Bienvenido, Enrique
@@ -91,14 +91,15 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- fab placed to the bottom end -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="primary">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
-      <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+    <!-- fab placed to the bottom end -->
+    <ion-fab (click)="go('add-transaction')" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="primary">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button><!--
+      <ion-fab-list side="top">
+        <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
+        <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
+      </ion-fab-list>-->
+    </ion-fab>
+
 </ion-content>

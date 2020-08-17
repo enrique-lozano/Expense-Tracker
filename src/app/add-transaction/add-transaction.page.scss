@@ -1,0 +1,98 @@
+
+
+ion-toolbar {
+    --background: #f2f2f2;
+}
+
+
+#top{
+    height: 50%;
+    width: 100%;
+}
+
+.back-green{
+    background-color: #2ECC71;
+}
+
+.back-red{
+    background-color: #E74C3C;
+}
+.back-blue{
+    background-color: #3498DB;
+}
+
+#value{
+    height: 65%;
+    padding: 3%;
+    padding-top: 0%;
+    font-size: 128px;
+    font-weight: 500;
+    text-align: right;
+    color: white;
+    transition: all 0.6s;
+}
+
+.choose{
+    display: inline-block;
+    width: 50%;
+    color: white;
+    text-align: center;
+}
+.choose-title{
+    font-weight: 200;
+    font-size: large;
+}
+
+.calc-row{
+    height: 12.5%;
+    width: 100%;
+}
+
+.button{
+    //display: inline-block;
+    //width: 100%;
+    margin: 0;
+    cursor: pointer;
+    padding-top: 5px;
+    font-size: 48px;
+    border-radius: 200px;
+    border-style: none;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    transition: all 0.6s;
+}
+
+.but-darked{
+    background-color: lightgray;
+    border-radius: 0px;
+    padding-top: 15px;
+}
+
+.but-round{
+    border-top-left-radius: 20px;
+}
+
+.button:active {
+    background-color:grey;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+
+
+ion-grid{
+    padding:0;
+    margin: 0;
+    height: 100%;
+}
+
+ion-row{
+    //border: 1px solid black;
+}
+
+ion-col{
+    padding: 0;
+    //border: 1px solid black;
+}
+
+
+
