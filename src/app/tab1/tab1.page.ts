@@ -40,12 +40,12 @@ export class Tab1Page {
 
     //-----------------------------------------------------
      
-    /*
+    
     this.service.getAccounts().subscribe(elem => {
       this.all_accounts = elem;
       console.log(this.all_accounts);
       this.getBalance();
-    });*/
+    });
 
     setTimeout(() => {
       console.log('Async refreshing operation has ended');

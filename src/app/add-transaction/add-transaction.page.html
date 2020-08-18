@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add transaction</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Añadir Transacción</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,24 +24,29 @@
       </ion-segment>
     </ion-toolbar>
 
-    <div id="value">
-      <span>{{sign}}{{value}}</span>
-    </div>
-    <div class="chooser">
-      <div class="choose">
-        <span class="choose-title">Cuenta</span><br>
-        effdkjd
-      </div>
-      <div class="choose">
-        <span class="choose-title">Categoria</span><br>
-        effdkjd
-      </div>
-    </div>
+    <ion-grid style="height: 85%;">
+      <ion-row style="height: 75%;">
+        <ion-col id="value" class="ion-align-self-center">
+          <span>{{sign}}{{value}}</span>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height: 25%;">
+        <ion-col class="choose ion-align-self-center">
+          <span class="choose-title">Cuenta</span><br>
+          effdkjd
+        </ion-col>
+        <ion-col class="choose ion-align-self-center">
+          <span class="choose-title">Categoria</span><br>
+          effdkjd
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </div>
 
   <ion-grid>
     <ion-row *ngFor="let group of buttons" class="calc-row">
-      <ion-col *ngFor="let but of group" (click)="butPress(but)">
+      <ion-col *ngFor="let but of group" (click)="butPress(but)" class="ion-align-self-center">
         <div *ngIf="but<10 || but=='.' || but=='AC' || but=='<-'" class="button">
           <span>{{but}}</span>
         </div> 

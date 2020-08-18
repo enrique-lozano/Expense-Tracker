@@ -23,9 +23,9 @@ ion-toolbar {
 
 #value{
     height: 65%;
-    padding: 3%;
-    padding-top: 0%;
+    padding-right: 3%;
     font-size: 128px;
+    line-height: 128px;
     font-weight: 500;
     text-align: right;
     color: white;
@@ -33,14 +33,15 @@ ion-toolbar {
 }
 
 .choose{
-    display: inline-block;
-    width: 50%;
+    //display: inline-block;
+    //width: 50%;
     color: white;
     text-align: center;
 }
 .choose-title{
     font-weight: 200;
     font-size: large;
+    text-align: center;
 }
 
 .calc-row{
@@ -49,24 +50,19 @@ ion-toolbar {
 }
 
 .button{
-    //display: inline-block;
-    //width: 100%;
     margin: 0;
     cursor: pointer;
-    padding-top: 5px;
-    font-size: 48px;
+    font-size: 46px;
     border-radius: 200px;
     border-style: none;
     text-align: center;
-    align-items: center;
-    align-content: center;
     transition: all 0.6s;
 }
 
 .but-darked{
     background-color: lightgray;
     border-radius: 0px;
-    padding-top: 15px;
+    padding-top: 18%;
 }
 
 .but-round{

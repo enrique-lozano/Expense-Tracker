@@ -24,12 +24,17 @@ export class AddTransactionPage implements OnInit {
     if(this.value=='0'){
       this.value = '';
     }
+
+    if(num=='<-'){
+      this.value = this.value.slice(0,-1);
+      return;
+    }
     
     if(num=='AC'){
       this.value = '0';
       document.getElementById("value").style.fontSize="128px";
     }else{
-      if(this.value.length>15){
+      if(this.value.length>13){
         return;
       }else{
         this.value += num;
