@@ -9,6 +9,14 @@ const routes: Routes = [
   {
     path: 'add-transaction',
     loadChildren: () => import('./add-transaction/add-transaction.module').then( m => m.AddTransactionPageModule)
+  },
+  {
+    path: 'sel-category',
+    loadChildren: () => import('./select/sel-category/sel-category.module').then( m => m.SelCategoryPageModule)
+  },
+  {
+    path: 'sel-account',
+    loadChildren: () => import('./select/sel-account/sel-account.module').then( m => m.SelAccountPageModule)
   }
 ];
 @NgModule({

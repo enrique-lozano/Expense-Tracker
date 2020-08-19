@@ -34,12 +34,10 @@ export class Tab1Page {
     this.service.createAccount("Inversiones", 3450, "wallet");
     this.service.createCategory("Comida", "food", "Basico", "Gasto", "Ey");
     this.service.createCategory("Restaurants", "food", "Basico", "Gasto", "Ey");
-    this.service.createTransaction("Comida","General", 281);
+    this.service.createTransaction("Comida","General", 281,"","");
     */    
 
-
-    //-----------------------------------------------------
-     
+    //-----------------------------------------------------     
     
     this.service.getAccounts().subscribe(elem => {
       this.all_accounts = elem;

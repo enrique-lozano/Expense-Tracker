@@ -1,7 +1,34 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="secondary">
     <ion-title>
-      Tab 2
+      Mis transacciones
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let trans of all_transactions">
+      <ion-col class="ion-align-self-center" size="2">
+        <ion-icon size="large" name="{{trans.category.icon}}"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <h2>{{trans.category.name}}</h2>
+        <span>{{trans.note}}</span>
+      </ion-col>
+      <ion-col class="ion-align-self-center" style="text-align: right;">
+        <h2>{{trans.value}}</h2>
+        <span>{{trans.date}}</span>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

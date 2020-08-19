@@ -13,6 +13,10 @@ export class DatabaseService {
   private categories:AngularFirestoreCollection<Category>;
   private transactions:AngularFirestoreCollection<Transaction>;
 
+  public selectedCategory:Category;
+  public selectedAccount:Account;
+  public all_accounts:Account[];
+
   constructor(private db: AngularFirestore) {
     this.accounts=this.db.collection('accounts');
     this.categories=this.db.collection('categories');
@@ -120,7 +124,7 @@ export class DatabaseService {
     return this.transactions.valueChanges({idField: 'id'});
   } 
 
-  public createTransaction(category: string, account: string, value: number){
+  public createTransaction(category: string, account: string, value: number, date:string, note:string){
     var x: Account;
     var y: Category;
     this.getAccount(account).then(acc =>{
@@ -133,6 +137,8 @@ export class DatabaseService {
           category: y,
           account: x,
           value: value,
+          date: date,
+          note: note,
           id: transaction_id  //ID-> Primary key
         };   
         return this.transactions.doc(transaction_id).set(new_transaction);

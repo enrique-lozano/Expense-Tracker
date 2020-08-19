@@ -31,13 +31,13 @@
         </ion-col>
       </ion-row>
       <ion-row style="height: 25%;">
-        <ion-col class="choose ion-align-self-center">
+        <ion-col class="choose ion-align-self-center" (click)="go('sel-account')">
           <span class="choose-title">Cuenta</span><br>
-          effdkjd
+          <span *ngIf="selectedAccount!=''">{{selectedAccount}}</span>
         </ion-col>
-        <ion-col class="choose ion-align-self-center">
+        <ion-col class="choose ion-align-self-center" (click)="go('sel-category')">
           <span class="choose-title">Categoria</span><br>
-          effdkjd
+          <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -46,17 +46,17 @@
 
   <ion-grid>
     <ion-row *ngFor="let group of buttons" class="calc-row">
-      <ion-col *ngFor="let but of group" (click)="butPress(but)" class="ion-align-self-center">
-        <div *ngIf="but<10 || but=='.' || but=='AC' || but=='<-'" class="button">
+      <ion-col *ngFor="let but of group" class="ion-align-self-center">
+        <div *ngIf="but<10 || but=='.' || but=='AC' || but=='<-'" class="button" (click)="butPress(but)">
           <span>{{but}}</span>
         </div> 
-        <div *ngIf="but=='Cal'" class="button but-darked but-round">
+        <div *ngIf="but=='Cal'" class="button but-darked but-round" (click)="openCalendar()">
           <ion-icon name="calendar-outline"></ion-icon>
         </div> 
-        <div *ngIf="but=='Not'" class="button but-darked">
+        <div *ngIf="but=='Not'" class="button but-darked" (click)="openNote()">
           <ion-icon name="create-outline"></ion-icon>
         </div> 
-        <div *ngIf="but=='FIN'" class="button but-darked">
+        <div *ngIf="but=='FIN'" class="button but-darked" (click)="createTransaction()">
           <ion-icon name="checkmark-done-outline"></ion-icon>
         </div>           
       </ion-col>

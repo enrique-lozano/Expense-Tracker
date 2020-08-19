@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DatabaseService } from '../services/database.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-transaction',
@@ -7,10 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTransactionPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private service:DatabaseService, public alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.setRed();
+  }
+  
+  public selectedCategory:string = 'Seleccionar';
+  public selectedAccount:string = 'Seleccionar';
+  public date:string = '';
+  public note:string = '';
+
+  ionViewDidEnter(){
+    if(this.service.selectedCategory == undefined && this.service.selectedAccount == undefined){
+      return;
+    }if(this.service.selectedCategory != undefined && this.service.selectedAccount == undefined){
+      this.selectedCategory = this.service.selectedCategory.name;
+      return;
+    }if(this.service.selectedCategory == undefined && this.service.selectedAccount != undefined){
+      this.selectedAccount = this.service.selectedAccount.name;
+      return;
+    }
+    this.selectedCategory = this.service.selectedCategory.name;
+    this.selectedAccount = this.service.selectedAccount.name;
   }
 
   sign:string='-';
@@ -50,6 +72,24 @@ export class AddTransactionPage implements OnInit {
     }
   }
 
+  createTransaction(){
+    if(this.date==''){ //ONLY IF DATE IS NOT SELECTED BY THE USER
+      var year = new Date().getFullYear();
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      this.date = year + '-' + month + '-' + date;
+      if (month<10){
+        this.date = year + '-0' + month + '-' + date;
+      }if (date<10){
+        this.date = year + '-' + month + '-0' + date;
+      }if (date<10 && month<10){
+        this.date = year + '-0' + month + '-0' + date;
+      }
+    }
+    this.service.createTransaction(this.selectedCategory,this.selectedAccount,Number(this.value), this.date, this.note);
+    this.go('tabs/tab2');
+  }
+
   setGreen(){
     this.sign='+';
     document.getElementById("top").setAttribute("class","back-green ")
@@ -61,6 +101,70 @@ export class AddTransactionPage implements OnInit {
   setBlue(){
     this.sign='';
     document.getElementById("top").setAttribute("class","back-blue ")
+  }
+
+  async openNote(){
+    const alert = await this.alertCtrl.create({
+      inputs: [
+        {
+          name: 'note',
+          placeholder: 'Nota',
+        },
+      ],
+      header: 'Añade una nota',
+      message: '',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.note = data.note;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async openCalendar(){
+    const alert = await this.alertCtrl.create({
+      inputs: [
+        {
+          name: 'date',
+          placeholder: '',
+          type: 'date',
+        },
+      ],
+      header: 'Añade una fecha',
+      message: 'Si no seleccionas ningún dia, tu transacción sera añadida al dia actual',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.date = data.date;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  
+  go(url:string){
+    this.router.navigate([url]);
   }
 
 
