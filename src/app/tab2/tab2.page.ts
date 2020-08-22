@@ -10,13 +10,21 @@ import { Transaction } from '../services/interfaces';
 export class Tab2Page{
 
   private all_transactions: Transaction[];
+  private clicked: boolean[] = [];
   constructor(private service:DatabaseService) {  }
 
   ngOnInit() {
     this.service.getTransactions().subscribe(elem => {
       this.all_transactions = elem;
-      console.log("Transactions read. Elements:", this.all_transactions.length)
+      console.log("Transactions read. Elements:", this.all_transactions.length);
+      for (var i=0; i<this.all_transactions.length; i++){
+        this.clicked.push(false);
+      }
     });
+  }
+
+  doClick(i:number){
+    this.clicked[i] = !this.clicked[i];
   }
 
 

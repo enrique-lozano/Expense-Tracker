@@ -16,7 +16,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor="let trans of all_transactions">
+    <ion-row *ngFor="let trans of all_transactions; let i=index" (click)="doClick(i)">
       <ion-col class="ion-align-self-center" size="2">
         <ion-icon size="large" name="{{trans.category.icon}}"></ion-icon>
       </ion-col>
@@ -28,6 +28,10 @@
         <h2>{{trans.value}}</h2>
         <span>{{trans.date}}</span>
       </ion-col>
+      <div *ngIf="clicked[i]" style="width: 100%; text-align: center; padding-bottom: 2%;">
+        <ion-button class="edit-button">Editar</ion-button>
+        <ion-button color="secondary" class="delete-button">Eliminar</ion-button>
+      </div>
     </ion-row>
 
   </ion-grid>
