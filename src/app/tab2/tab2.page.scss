@@ -2,6 +2,7 @@
 ion-row{
     //border: 1px solid black;
     border-bottom: 0.2px solid #D0D0D0;
+    transition: all .5s;
 }
 
 ion-col{
@@ -13,13 +14,17 @@ h2{
     margin-top: 5px;
 }
 
+/*
 .edit-button{
-    margin-right: 2%;
+    margin-right: 1%;
     --padding-end: 50px;
     --padding-start: 50px;
 }
 
 .delete-button{
-    --padding-end: 50px;
-    --padding-start: 50px;
+    margin-left: 1%;
+    --padding-end: 40px;
+    --padding-start: 40px;
 }
+
+*/

@@ -14,6 +14,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 const config = {
   apiKey: "AIzaSyCNECEPVMZ3eXqYgrzTzMQ0NstYajwkbXw",
   authDomain: "expense-tracker-39c01.firebaseapp.com",
@@ -32,7 +34,8 @@ const config = {
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth
-    AngularFireStorageModule // storage
+    AngularFireStorageModule, // storage
+    BrowserAnimationsModule
   ],
   providers: [
     StatusBar,

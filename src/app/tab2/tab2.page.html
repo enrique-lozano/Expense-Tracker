@@ -16,21 +16,25 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor="let trans of all_transactions; let i=index" (click)="doClick(i)">
-      <ion-col class="ion-align-self-center" size="2">
+    <ion-row *ngFor="let trans of all_transactions; let i=index">
+      <ion-col class="ion-align-self-center" size="2" (click)="doClick(i)">
         <ion-icon size="large" name="{{trans.category.icon}}"></ion-icon>
       </ion-col>
-      <ion-col class="ion-align-self-center">
+      <ion-col class="ion-align-self-center" (click)="doClick(i)">
         <h2>{{trans.category.name}}</h2>
         <span>{{trans.note}}</span>
       </ion-col>
-      <ion-col class="ion-align-self-center" style="text-align: right;">
+      <ion-col class="ion-align-self-center" style="text-align: right;" (click)="doClick(i)">
         <h2>{{trans.value}}</h2>
         <span>{{trans.date}}</span>
       </ion-col>
-      <div *ngIf="clicked[i]" style="width: 100%; text-align: center; padding-bottom: 2%;">
-        <ion-button class="edit-button">Editar</ion-button>
-        <ion-button color="secondary" class="delete-button">Eliminar</ion-button>
+      <div *ngIf="clicked[i]" [@fadeInOut] style="width: 100%; text-align: center; padding-bottom: 2%;">
+        <div style="width: 45%; display: inline-block;">
+          <ion-button expand="block" class="edit-button">Editar</ion-button>
+        </div>
+        <div style="width: 45%;display: inline-block;">
+          <ion-button expand="block" color="secondary" class="delete-button">Eliminar</ion-button>
+        </div>
       </div>
     </ion-row>
 
