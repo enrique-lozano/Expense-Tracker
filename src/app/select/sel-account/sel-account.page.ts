@@ -15,7 +15,6 @@ export class SelAccountPage implements OnInit {
   constructor(private service:DatabaseService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.all_accounts)
     this.service.getAccounts().subscribe(elem => {
       this.all_accounts = elem;
       this.all_accounts.sort(this.compare);

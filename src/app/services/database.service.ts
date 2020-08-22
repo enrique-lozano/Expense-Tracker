@@ -47,6 +47,7 @@ export class DatabaseService {
     {
       name: name,
       initial_balance: initial_balance,
+      balance: initial_balance,
       icon: icon
     };
     return this.accounts.doc(name).set(new_account);  //Name->Primary Key (ID)
@@ -128,6 +129,8 @@ export class DatabaseService {
     var x: Account;
     var y: Category;
     this.getAccount(account).then(acc =>{
+      var new_balance = acc.balance + value;
+      this.accounts.doc(acc.name).update({balance: new_balance})
       x = acc;
       this.getCategory(category).then(cat =>{
         y = cat;
@@ -152,7 +155,14 @@ export class DatabaseService {
   }
   
   public removeTransaction(id: string){
-    return this.transactions.doc(id).delete();
+    this.getTransaction(id).then((elem) => {
+      console.log(elem);
+      this.getAccount(elem.account.name).then(acc =>{
+        var new_balance = acc.balance - elem.value;
+        this.accounts.doc(acc.name).update({balance: new_balance});
+        return this.transactions.doc(id).delete();
+      });
+    });
   }
 
   public removeAllTransactions(){

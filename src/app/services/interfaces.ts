@@ -1,6 +1,7 @@
 export interface Account{
     name: string;
     initial_balance: number;
+    balance: number;
     icon: string;
 }
 

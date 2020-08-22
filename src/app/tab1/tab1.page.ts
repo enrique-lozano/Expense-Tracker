@@ -23,7 +23,12 @@ export class Tab1Page {
     this.service.getAccount("Eyy").then((elem) => {
       console.log(elem.initial_balance);
     });
-    */
+    */      
+    this.service.getAccounts().subscribe(elem => {
+      this.all_accounts = elem;
+      console.log(this.all_accounts);
+      this.getBalance();
+    });
 
   }
 
@@ -35,15 +40,11 @@ export class Tab1Page {
     this.service.createCategory("Comida", "food", "Basico", "Gasto", "Ey");
     this.service.createCategory("Restaurants", "food", "Basico", "Gasto", "Ey");
     this.service.createTransaction("Comida","General", 281,"","");
-    */    
+    */
+   
+    this.getBalance();
 
     //-----------------------------------------------------     
-    
-    this.service.getAccounts().subscribe(elem => {
-      this.all_accounts = elem;
-      console.log(this.all_accounts);
-      this.getBalance();
-    });
 
     setTimeout(() => {
       console.log('Async refreshing operation has ended');
@@ -55,10 +56,12 @@ export class Tab1Page {
     this.balance = 0; //Reset the number and recalculate
     this.service.getAccounts().subscribe(elem => {
       for (var i = 0; i<elem.length; i++){
-        this.balance = +this.balance + elem[i].initial_balance;
+        this.balance = +this.balance + elem[i].balance;
       }
+      this.balance = Math.round(this.balance);
     });
   }
+
 
   go(url:string){
     this.router.navigate([url]);

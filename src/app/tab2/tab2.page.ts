@@ -7,10 +7,10 @@ import { Transaction } from '../services/interfaces';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page{
 
   private all_transactions: Transaction[];
-  constructor(private service:DatabaseService) {}
+  constructor(private service:DatabaseService) {  }
 
   ngOnInit() {
     this.service.getTransactions().subscribe(elem => {
@@ -18,5 +18,6 @@ export class Tab2Page {
       console.log("Transactions read. Elements:", this.all_transactions.length)
     });
   }
+
 
 }
