@@ -81,7 +81,11 @@ export class DatabaseService {
 
   public getCategories():Observable<Category[]>{
     return this.categories.valueChanges();
-  } 
+  }
+
+  public getCategoriesByType(type: string):Observable<Category[]>{
+    return this.db.collection<Category>("categories",res => res.where('type', '==', type)).valueChanges();
+  }
 
   public createCategory(name: string, icon: string, parent: string, type: string, type2: string){
     var new_category: Category =
@@ -129,11 +133,16 @@ export class DatabaseService {
     var x: Account;
     var y: Category;
     this.getAccount(account).then(acc =>{
-      var new_balance = acc.balance + value;
-      this.accounts.doc(acc.name).update({balance: new_balance})
       x = acc;
       this.getCategory(category).then(cat =>{
         y = cat;
+        if(cat.type=="Ingreso"){
+          var new_balance = acc.balance + value;
+          this.accounts.doc(acc.name).update({balance: new_balance})
+        }else if(cat.type=="Gasto"){
+          var new_balance = acc.balance - value;
+          this.accounts.doc(acc.name).update({balance: new_balance})
+        }
         var transaction_id = this.db.createId();
         var new_transaction: Transaction =
         {
@@ -156,11 +165,17 @@ export class DatabaseService {
   
   public removeTransaction(id: string){
     this.getTransaction(id).then((elem) => {
-      console.log(elem);
       this.getAccount(elem.account.name).then(acc =>{
-        var new_balance = acc.balance - elem.value;
-        this.accounts.doc(acc.name).update({balance: new_balance});
-        return this.transactions.doc(id).delete();
+        this.getCategory(elem.category.name).then(cat =>{
+          if(cat.type=="Ingreso"){
+            var new_balance = acc.balance - elem.value;
+            this.accounts.doc(acc.name).update({balance: new_balance});
+          }else if(cat.type=="Gasto"){
+            var new_balance = acc.balance + elem.value;
+            this.accounts.doc(acc.name).update({balance: new_balance});
+          }
+          this.transactions.doc(id).delete();
+        });
       });
     });
   }

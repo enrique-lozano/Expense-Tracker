@@ -20,6 +20,7 @@ export class AddTransactionPage implements OnInit {
   public selectedAccount:string = 'Seleccionar';
   public date:string = '';
   public note:string = '';
+  public type:string = '';
 
   ionViewDidEnter(){
     if(this.service.selectedCategory == undefined && this.service.selectedAccount == undefined){
@@ -92,14 +93,17 @@ export class AddTransactionPage implements OnInit {
 
   setGreen(){
     this.sign='+';
+    this.type='Ingreso';
     document.getElementById("top").setAttribute("class","back-green ")
   }
   setRed(){
     this.sign='-';
+    this.type='Gasto';
     document.getElementById("top").setAttribute("class","back-red ")
   }
   setBlue(){
     this.sign='';
+    this.type='Transfer';
     document.getElementById("top").setAttribute("class","back-blue ")
   }
 

@@ -35,7 +35,15 @@
           <span class="choose-title">Cuenta</span><br>
           <span *ngIf="selectedAccount!=''">{{selectedAccount}}</span>
         </ion-col>
-        <ion-col class="choose ion-align-self-center" (click)="go('sel-category')">
+        <ion-col *ngIf="type=='Ingreso'" class="choose ion-align-self-center" (click)="go('sel-category-income')">
+          <span class="choose-title">Categoria</span><br>
+          <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
+        </ion-col>
+        <ion-col *ngIf="type=='Gasto'" class="choose ion-align-self-center" (click)="go('sel-category-expenses')">
+          <span class="choose-title">Categoria</span><br>
+          <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
+        </ion-col>
+        <ion-col *ngIf="type=='Transfer'" class="choose ion-align-self-center" (click)="go('sel-account')">
           <span class="choose-title">Categoria</span><br>
           <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
         </ion-col>

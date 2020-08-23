@@ -39,5 +39,14 @@ export class Tab2Page{
     this.clicked[i] = !this.clicked[i];
   }
 
+  editTransaction(id:string){
+    console.log("edit:", id)
+  }
+
+  deleteTransaction(id:string){
+    this.service.removeTransaction(id);
+  }
+
+
 
 }

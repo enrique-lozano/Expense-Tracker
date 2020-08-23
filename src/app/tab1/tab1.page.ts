@@ -29,7 +29,6 @@ export class Tab1Page {
       console.log(this.all_accounts);
       this.getBalance();
     });
-
   }
 
   doRefresh(event) {

@@ -17,6 +17,14 @@ const routes: Routes = [
   {
     path: 'sel-account',
     loadChildren: () => import('./select/sel-account/sel-account.module').then( m => m.SelAccountPageModule)
+  },
+  {
+    path: 'sel-category-expenses',
+    loadChildren: () => import('./select/sel-category-expenses/sel-category-expenses.module').then( m => m.SelCategoryExpensesPageModule)
+  },
+  {
+    path: 'sel-category-income',
+    loadChildren: () => import('./select/sel-category-income/sel-category-income.module').then( m => m.SelCategoryIncomePageModule)
   }
 ];
 @NgModule({
