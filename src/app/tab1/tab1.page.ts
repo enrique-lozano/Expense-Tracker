@@ -3,6 +3,7 @@ import { Chart } from 'chart.js';
 import { DatabaseService } from '../services/database.service'
 import { Account, Category } from '../services/interfaces'
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -12,9 +13,12 @@ import { Router } from '@angular/router';
 export class Tab1Page {
 
   private balance: number = 0;
+  private income: number = 0;
+  private expense: number = 0;
   private all_accounts: Account[];
+  private selected_time: string = "Mensual";
 
-  constructor(private service:DatabaseService, private router: Router){
+  constructor(private service:DatabaseService, private router: Router, public actionSheetController: ActionSheetController){
   }
 
 
@@ -23,12 +27,15 @@ export class Tab1Page {
     this.service.getAccount("Eyy").then((elem) => {
       console.log(elem.initial_balance);
     });
-    */      
+    */
+ 
     this.service.getAccounts().subscribe(elem => {
       this.all_accounts = elem;
       console.log(this.all_accounts);
       this.getBalance();
+      this.getIncomeAndExpense();
     });
+
   }
 
   doRefresh(event) {
@@ -42,6 +49,7 @@ export class Tab1Page {
     */
    
     this.getBalance();
+    this.getIncomeAndExpense();
 
     //-----------------------------------------------------     
 
@@ -59,6 +67,150 @@ export class Tab1Page {
       }
       this.balance = Math.round(this.balance);
     });
+  }
+
+  getIncomeAndExpense(){
+    var year = new Date().getFullYear();
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1; 
+    this.income = 0;
+    this.expense = 0; 
+    if(this.selected_time=="Semanal"){
+      for(var i=0; i<7;i++) {
+        this.service.getTransactionsByDay(date-i, month, year).subscribe(elem => {
+          for(var i=0; i<elem.length;i++){
+            if(elem[i].category.type=="Gasto"){
+              this.expense = this.expense + elem[i].value;
+              console.log(this.expense)
+            }
+            if(elem[i].category.type=="Ingreso"){
+              this.income = this.income + elem[i].value 
+            }
+          }
+        });
+      }
+      
+    }
+
+    if(this.selected_time=="Mensual"){ 
+      this.service.getTransactionsByMonth(month,year).subscribe(elem => {
+        for(var i=0; i<elem.length;i++){
+          if(elem[i].category.type=="Gasto"){
+            this.expense = this.expense + elem[i].value 
+          }
+          if(elem[i].category.type=="Ingreso"){
+            this.income = this.income + elem[i].value 
+          }
+        }
+      });
+    }
+    if(this.selected_time=="Trimestral"){ 
+      if(month<=3){
+        for (var i=1; i<4; i++){
+          this.service.getTransactionsByMonth(i,year).subscribe(elem => {
+            for(var i=0; i<elem.length;i++){
+              if(elem[i].category.type=="Gasto"){
+                this.expense = this.expense + elem[i].value 
+              }
+              if(elem[i].category.type=="Ingreso"){
+                this.income = this.income + elem[i].value 
+              }
+            }
+          });
+        }
+
+      }else if(month>3 && month<=6){
+        for (var i=4; i<7; i++){
+          this.service.getTransactionsByMonth(i, year).subscribe(elem => {
+            for(var i=0; i<elem.length;i++){
+              if(elem[i].category.type=="Gasto"){
+                this.expense = this.expense + elem[i].value 
+              }
+              if(elem[i].category.type=="Ingreso"){
+                this.income = this.income + elem[i].value 
+              }
+            }
+          });
+        }
+      }else if(month>6 && month<=9){
+        for (var i=7; i<10; i++){
+          this.service.getTransactionsByMonth(i,year).subscribe(elem => {
+            for(var i=0; i<elem.length;i++){
+              if(elem[i].category.type=="Gasto"){
+                this.expense = this.expense + elem[i].value 
+              }
+              if(elem[i].category.type=="Ingreso"){
+                this.income = this.income + elem[i].value 
+              }
+            }
+          });
+        }
+      }else if(month>9){
+        for (var i=10; i<12; i++){
+          this.service.getTransactionsByMonth(i,year).subscribe(elem => {
+            for(var i=0; i<elem.length;i++){
+              if(elem[i].category.type=="Gasto"){
+                this.expense = this.expense + elem[i].value 
+              }
+              if(elem[i].category.type=="Ingreso"){
+                this.income = this.income + elem[i].value 
+              }
+            }
+          });
+        }
+      }
+      
+    }
+    if(this.selected_time=="Anual"){
+      this.service.getTransactionsByYear(year).subscribe(elem => {
+        for(var i=0; i<elem.length;i++){
+          if(elem[i].category.type=="Gasto"){
+            this.expense = this.expense + elem[i].value 
+          }
+          if(elem[i].category.type=="Ingreso"){
+            this.income = this.income + elem[i].value 
+          }
+        }
+      });
+    }
+  }
+
+  async selectTime() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Lapso temporal',
+      buttons: [
+        { text: 'Anual', handler: () => {          
+            if(this.selected_time!="Anual"){
+              this.selected_time = "Anual";
+              this.getIncomeAndExpense();
+            }            
+          }
+        },
+        { text: 'Trimestral', handler: () => {
+            if(this.selected_time!="Trimestral"){
+              this.selected_time = "Trimestral";
+              this.getIncomeAndExpense();
+            }
+          }
+        },
+        { text: 'Mensual', handler: () => {
+            if(this.selected_time!="Mensual"){
+              this.selected_time = "Mensual";
+              this.getIncomeAndExpense();
+            }
+          }
+        },
+        { text: 'Semanal', handler: () => {
+            if(this.selected_time!="Semanal"){
+              this.selected_time = "Semanal";
+              this.getIncomeAndExpense();
+            }
+          }
+        },
+      ]
+    });
+
+    await actionSheet.present();
   }
 
 

@@ -18,6 +18,8 @@ export interface Transaction{
     account: Account;
     value: number;
     note: string;
-    date: string;
+    year: number;
+    month: number;
+    day: number;
     id: string;
 }

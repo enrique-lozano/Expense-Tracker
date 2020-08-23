@@ -126,12 +126,27 @@ export class DatabaseService {
   }
 
   public getTransactions():Observable<Transaction[]>{
-    return this.transactions.valueChanges({idField: 'id'});
-  } 
+    return this.transactions.valueChanges(); 
+  }
+
+  public getTransactionsByYear(year: number):Observable<Transaction[]>{
+    return this.db.collection<Transaction>("transactions",res => res.where('year', '==', year)).valueChanges();
+  }
+
+  public getTransactionsByMonth(month: number, year: number):Observable<Transaction[]>{
+    return this.db.collection<Transaction>("transactions",res => res.where('month', '==', month).where('year','==',year)).valueChanges();
+  }
+
+  public getTransactionsByDay(day: number, month: number, year: number):Observable<Transaction[]>{
+    return this.db.collection<Transaction>("transactions",res => res.where('day', '==', day).where('year','==',year).where('month','==',month)).valueChanges();
+  }
 
   public createTransaction(category: string, account: string, value: number, date:string, note:string){
     var x: Account;
     var y: Category;
+    var year = Number(date.split("-",4)[0]);
+    var month = Number(date.split("-",4)[1]);
+    var day = Number(date.split("-",4)[2]);
     this.getAccount(account).then(acc =>{
       x = acc;
       this.getCategory(category).then(cat =>{
@@ -149,7 +164,9 @@ export class DatabaseService {
           category: y,
           account: x,
           value: value,
-          date: date,
+          year: year,
+          month: month,
+          day: day,
           note: note,
           id: transaction_id  //ID-> Primary key
         };   

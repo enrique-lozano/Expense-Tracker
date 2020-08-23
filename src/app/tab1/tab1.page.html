@@ -4,7 +4,7 @@
       Bienvenido, Enrique
     </ion-title>
     <ion-buttons slot="primary">
-      <ion-button>
+      <ion-button (click)="selectTime()">
         <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -32,13 +32,13 @@
         <ion-icon name="arrow-up-circle" class="arrow-up"></ion-icon>
       </ion-col>
       <ion-col size="6">
-        Ingreso <br> <h4>1373 €</h4>
+        Ingreso <br> <h4>{{income}} €</h4>
       </ion-col>
       <ion-col size="2">
         <ion-icon name="arrow-down-circle" class="arrow-down"></ion-icon>
       </ion-col>
       <ion-col>
-        Gasto <br> <h4>753 €</h4>
+        Gasto <br> <h4>{{expense}} €</h4>
       </ion-col>
     </ion-row>
 
