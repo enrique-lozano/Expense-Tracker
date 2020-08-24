@@ -15,11 +15,16 @@ export class SelAccountPage implements OnInit {
   constructor(private service:DatabaseService, private router: Router) { }
 
   ngOnInit() {
-    this.service.getAccounts().subscribe(elem => {
-      this.all_accounts = elem;
-      this.all_accounts.sort(this.compare);
-      console.log("Category read. Elements:", this.all_accounts.length)
-    });    
+    if(this.service.all_accounts.length==0){
+      this.service.getAccounts().subscribe(elem => {
+        this.service.all_accounts = elem;
+        this.all_accounts = this.service.all_accounts;
+        this.all_accounts.sort(this.compare);
+      });
+    }else{
+      this.all_accounts = this.service.all_accounts;
+    }
+        
   }
 
   compare(a,b){

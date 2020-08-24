@@ -22,7 +22,7 @@ import {style, state, animate, transition, trigger} from '@angular/animations';
 export class Tab2Page{
 
   private all_transactions: Transaction[];
-  private clicked: boolean[] = [];
+  private clicked: boolean[] = []; //Array to show the option buttons in each transaction
   constructor(private service:DatabaseService) {  }
 
   ngOnInit() {
@@ -44,6 +44,9 @@ export class Tab2Page{
   }
 
   deleteTransaction(id:string){
+    for(var i=0; i<this.clicked.length;i++){
+      this.clicked[i] = false;
+    }
     this.service.removeTransaction(id);
   }
 

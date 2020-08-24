@@ -28,13 +28,16 @@ export class Tab1Page {
       console.log(elem.initial_balance);
     });
     */
- 
-    this.service.getAccounts().subscribe(elem => {
-      this.all_accounts = elem;
-      console.log(this.all_accounts);
-      this.getBalance();
-      this.getIncomeAndExpense();
-    });
+    if(this.service.all_accounts.length==0){
+      this.service.getAccounts().subscribe(elem => {
+        this.service.all_accounts = elem;
+        this.all_accounts = this.service.all_accounts;
+        this.getBalance();
+        this.getIncomeAndExpense();
+      });  
+    }else{
+      this.all_accounts = this.service.all_accounts;
+    }
 
   }
 
@@ -48,8 +51,8 @@ export class Tab1Page {
     this.service.createTransaction("Comida","General", 281,"","");
     */
    
-    this.getBalance();
-    this.getIncomeAndExpense();
+    this.resetBalance();
+    //this.getIncomeAndExpense();
 
     //-----------------------------------------------------     
 
@@ -59,7 +62,7 @@ export class Tab1Page {
     }, 2000);
   }
 
-  getBalance(){
+  resetBalance(){
     this.balance = 0; //Reset the number and recalculate
     this.service.getAccounts().subscribe(elem => {
       for (var i = 0; i<elem.length; i++){
@@ -67,6 +70,14 @@ export class Tab1Page {
       }
       this.balance = Math.round(this.balance);
     });
+  }
+
+  getBalance(){ //LOCALLY INSTEAD OF READING THE DATABASE
+    this.balance = 0; //Reset the number and recalculate
+    for(var i=0; i<this.all_accounts.length; i++){
+      this.balance = +this.balance + this.all_accounts[i].balance;
+    }
+    this.balance = Math.round(this.balance);
   }
 
   getIncomeAndExpense(){
@@ -81,7 +92,6 @@ export class Tab1Page {
           for(var i=0; i<elem.length;i++){
             if(elem[i].category.type=="Gasto"){
               this.expense = this.expense + elem[i].value;
-              console.log(this.expense)
             }
             if(elem[i].category.type=="Ingreso"){
               this.income = this.income + elem[i].value 

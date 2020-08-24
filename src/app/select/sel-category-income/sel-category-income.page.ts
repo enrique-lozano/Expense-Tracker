@@ -14,11 +14,15 @@ export class SelCategoryIncomePage implements OnInit {
   constructor(private service:DatabaseService, private router: Router) { }
 
   ngOnInit() {
-    this.service.getCategoriesByType("Ingreso").subscribe(elem => {
-      this.all_categories = elem;
-      this.all_categories.sort(this.compare);
-      console.log("Category read. Elements:", this.all_categories.length)
-    });    
+    if(this.service.all_categories_incomes.length==0){
+      this.service.getCategoriesByType("Ingreso").subscribe(elem => {
+        this.service.all_categories_incomes = elem;
+        this.all_categories = this.service.all_categories_incomes;
+        this.all_categories.sort(this.compare);
+      });  
+    }else{
+      this.all_categories = this.service.all_categories_incomes;
+    } 
   }
 
   compare(a,b){

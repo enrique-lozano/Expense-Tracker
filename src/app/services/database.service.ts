@@ -7,7 +7,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseService {
+export class DatabaseService { 
 
   private accounts:AngularFirestoreCollection<Account>;
   private categories:AngularFirestoreCollection<Category>;
@@ -15,7 +15,10 @@ export class DatabaseService {
 
   public selectedCategory:Category;
   public selectedAccount:Account;
-  public all_accounts:Account[];
+  public all_accounts:Account[] = [];
+  public all_categories:Category[] = [];
+  public all_categories_expenses:Category[] = [];
+  public all_categories_incomes:Category[] = [];
 
   constructor(private db: AngularFirestore) {
     this.accounts=this.db.collection('accounts');
@@ -39,6 +42,7 @@ export class DatabaseService {
   }
 */
   public getAccounts():Observable<Account[]>{
+    console.log("Reading accounts");
     return this.accounts.valueChanges();
   } 
 
@@ -80,10 +84,12 @@ export class DatabaseService {
   }
 
   public getCategories():Observable<Category[]>{
+    console.log("Reading categories");
     return this.categories.valueChanges();
   }
 
   public getCategoriesByType(type: string):Observable<Category[]>{
+    console.log("Reading categories of type", type);
     return this.db.collection<Category>("categories",res => res.where('type', '==', type)).valueChanges();
   }
 
@@ -126,18 +132,22 @@ export class DatabaseService {
   }
 
   public getTransactions():Observable<Transaction[]>{
+    console.log("Reading transactions");
     return this.transactions.valueChanges(); 
   }
 
   public getTransactionsByYear(year: number):Observable<Transaction[]>{
+    console.log("Reading transactions (by year)");
     return this.db.collection<Transaction>("transactions",res => res.where('year', '==', year)).valueChanges();
   }
 
   public getTransactionsByMonth(month: number, year: number):Observable<Transaction[]>{
+    console.log("Reading transactions (by month)");
     return this.db.collection<Transaction>("transactions",res => res.where('month', '==', month).where('year','==',year)).valueChanges();
   }
 
   public getTransactionsByDay(day: number, month: number, year: number):Observable<Transaction[]>{
+    console.log("Reading transactions (by day)");
     return this.db.collection<Transaction>("transactions",res => res.where('day', '==', day).where('year','==',year).where('month','==',month)).valueChanges();
   }
 

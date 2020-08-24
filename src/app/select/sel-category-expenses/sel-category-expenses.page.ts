@@ -15,11 +15,16 @@ export class SelCategoryExpensesPage implements OnInit {
   constructor(private service:DatabaseService, private router: Router) { }
 
   ngOnInit() {
-    this.service.getCategoriesByType("Gasto").subscribe(elem => {
-      this.all_categories = elem;
-      this.all_categories.sort(this.compare);
-      console.log("Category read. Elements:", this.all_categories.length)
-    });    
+    if(this.service.all_categories_expenses.length==0){
+      this.service.getCategoriesByType("Gasto").subscribe(elem => {
+        this.service.all_categories_expenses = elem;
+        this.all_categories = this.service.all_categories_expenses;
+        this.all_categories.sort(this.compare);
+      });  
+    }else{
+      this.all_categories = this.service.all_categories_expenses;
+    }
+      
   }
 
   compare(a,b){
