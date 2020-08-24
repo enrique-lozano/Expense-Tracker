@@ -73,6 +73,10 @@
 
   <ion-card class="card last" fixed="true">
     <ion-card-header>
+      <ion-card-subtitle *ngIf="selected_time=='Mensual'">Este mes</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="selected_time=='Trimestral'">Este trimestre</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="selected_time=='Anual'">Este año</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="selected_time=='Semanal'">Ultimos 7 dias</ion-card-subtitle>
       <ion-card-title>Salud financiera</ion-card-title>
     </ion-card-header>
     <ion-card-content>

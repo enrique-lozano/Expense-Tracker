@@ -1,5 +1,5 @@
 
-ion-row{
+.grid-transactions ion-row{
     //border: 1px solid black;
     border-bottom: 0.2px solid #D0D0D0;
     transition: all .5s;
@@ -9,6 +9,34 @@ ion-col{
     //padding: 0;
     //border: 1px solid black;
 }
+
+.container{
+    --ion-background-color:#e5e5e5;
+}
+
+.intro{
+    padding: 5%;
+    background-color: white;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.arrow-up{
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-left: 3%;
+    color: green;
+    font-size: 48px; //Size of the icon
+}
+
+.arrow-down{
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-left: 3%;
+    color: red;
+    font-size: 48px; //Size of the icon
+}
+
 
 h2{
     margin-top: 5px;

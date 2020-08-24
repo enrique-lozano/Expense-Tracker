@@ -4,18 +4,42 @@
       Mis transacciones
     </ion-title>
     <ion-buttons slot="primary">
-      <ion-button>
+      <ion-button (click)="selectOrder()">
         <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button (click)="selectMonth()">
         <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-grid class="intro" fixed="true">
+    <ion-row>
+      <ion-col class="saldo">
+        Saldo en todas las cuentas
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2">
+        <ion-icon name="arrow-up-circle" class="arrow-up"></ion-icon>
+      </ion-col>
+      <ion-col size="6">
+        Ingreso <br> <h4>{{income}} €</h4>
+      </ion-col>
+      <ion-col size="2">
+        <ion-icon name="arrow-down-circle" class="arrow-down"></ion-icon>
+      </ion-col>
+      <ion-col>
+        Gasto <br> <h4>{{expense}} €</h4>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+
+
+  <ion-grid class="grid-transactions">
     <ion-row *ngFor="let trans of all_transactions; let i=index" [@fadeInOut]>
       <ion-col class="ion-align-self-center" size="2" (click)="doClick(i)">
         <ion-icon size="large" name="{{trans.category.icon}}"></ion-icon>
@@ -28,7 +52,7 @@
         <h2 *ngIf="trans.category.type=='Gasto'" class="value-expense">{{trans.value}}</h2>
         <h2 *ngIf="trans.category.type=='Ingreso'" class="value-income">{{trans.value}}</h2>
         <h2 *ngIf="trans.category.type=='Transfer'">{{trans.value}}</h2>
-        <span>{{trans.day}}-{{trans.month}}</span>
+        <span>{{trans.day}}-{{trans.month}}-{{trans.year}}</span>
       </ion-col>
       <div *ngIf="clicked[i]" [@fadeInOut] style="width: 100%; text-align: center; padding-bottom: 2%;">
         <div style="width: 45%; display: inline-block;" (click)="editTransaction(trans.id)">

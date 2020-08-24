@@ -98,12 +98,11 @@ export class Tab1Page {
             }
           }
         });
-      }
-      
+      }    
     }
-
     if(this.selected_time=="Mensual"){ 
       this.service.getTransactionsByMonth(month,year).subscribe(elem => {
+        this.service.all_transactions_this_month = elem;
         for(var i=0; i<elem.length;i++){
           if(elem[i].category.type=="Gasto"){
             this.expense = this.expense + elem[i].value 
