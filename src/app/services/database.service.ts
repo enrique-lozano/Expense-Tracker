@@ -19,6 +19,7 @@ export class DatabaseService {
   public all_categories:Category[] = [];
   public all_categories_expenses:Category[] = [];
   public all_categories_incomes:Category[] = [];
+  public all_transactions:Transaction[] = [];
   public all_transactions_this_month:Transaction[] = [];
 
   constructor(private db: AngularFirestore) {

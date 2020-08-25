@@ -83,10 +83,13 @@
       <ion-grid>
         <ion-row>
           <ion-col size="5" class="ion-align-self-center">
-            <span class="healthy-value">70%</span>
+            <span id="healthy-value">{{healthy}}%</span>
           </ion-col>
           <ion-col size="7" class="ion-align-self-center">
-            <p class="healthy-text">Lorem ipsum, o voluptas facilis. Dolor quisquam, aperiam debitis recusandae adipisci unde beatae voluptatem minima autem! Fugiat voluptatem necessitatibus ea!</p>
+            <p class="healthy-text" *ngIf="healthy>=20 && healthy<=50">Enhorabuena, has conseguido ahorrar un <b>{{healthy}}%</b> de tus ingresos durante este periodo. Visita la pestaña de análisis para ver donde puedes ahorrar aun más!</p>
+            <p class="healthy-text" *ngIf="healthy>50">Vaya, parece que has conseguido ahorrar un <b>{{healthy}}%</b> de tus ingresos durante este periodo. Parece que ya eres todo un expert@. Sigue asi!!!!</p>
+            <p class="healthy-text" *ngIf="healthy<20 && healthy>0">Enhorabuena, has conseguido ahorrar un <b>{{healthy}}%</b> de tus ingresos durante este periodo. Sin embargo, creemos que aun puedes hacer mucho mas, tu puedes! </p>
+            <p class="healthy-text" *ngIf="healthy==0">Vaya, no has conseguido ahorrar nada durante este periodo :( Visita la pestaña de análisis para ver donde estan tus debilidades financieras.</p>
           </ion-col>
         </ion-row>
       </ion-grid>

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { DatabaseService } from '../services/database.service'
-import { Account, Category } from '../services/interfaces'
+import { Account, Category, Transaction } from '../services/interfaces'
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
 
@@ -16,7 +16,9 @@ export class Tab1Page {
   private income: number = 0;
   private expense: number = 0;
   private all_accounts: Account[];
+  private all_transactions: Transaction[];
   private selected_time: string = "Mensual";
+  private healthy: number = 0;
 
   constructor(private service:DatabaseService, private router: Router, public actionSheetController: ActionSheetController){
   }
@@ -33,10 +35,19 @@ export class Tab1Page {
         this.service.all_accounts = elem;
         this.all_accounts = this.service.all_accounts;
         this.getBalance();
-        this.getIncomeAndExpense();
       });  
     }else{
       this.all_accounts = this.service.all_accounts;
+    }
+
+    if(this.service.all_transactions.length==0){
+      this.service.getTransactions().subscribe(elem => {
+        this.service.all_transactions = elem;
+        this.all_transactions = this.service.all_transactions;
+        this.getIncomeAndExpense();
+      });  
+    }else{
+      this.all_transactions = this.service.all_transactions;
     }
 
   }
@@ -52,7 +63,12 @@ export class Tab1Page {
     */
    
     this.resetBalance();
-    //this.getIncomeAndExpense();
+    this.getIncomeAndExpense();
+    this.service.getTransactions().subscribe(elem => {
+      this.service.all_transactions = elem;
+      this.all_transactions = this.service.all_transactions;
+      this.getIncomeAndExpense();
+    });  
 
     //-----------------------------------------------------     
 
@@ -65,6 +81,8 @@ export class Tab1Page {
   resetBalance(){
     this.balance = 0; //Reset the number and recalculate
     this.service.getAccounts().subscribe(elem => {
+      this.service.all_accounts = elem;
+      this.all_accounts = this.service.all_accounts;
       for (var i = 0; i<elem.length; i++){
         this.balance = +this.balance + elem[i].balance;
       }
@@ -88,99 +106,123 @@ export class Tab1Page {
     this.expense = 0; 
     if(this.selected_time=="Semanal"){
       for(var i=0; i<7;i++) {
-        this.service.getTransactionsByDay(date-i, month, year).subscribe(elem => {
-          for(var i=0; i<elem.length;i++){
-            if(elem[i].category.type=="Gasto"){
-              this.expense = this.expense + elem[i].value;
+        for(var j=0; j<this.all_transactions.length; j++){
+          if(this.all_transactions[j].day==(date-i) && this.all_transactions[j].month==month && this.all_transactions[j].year==year){
+            if(this.all_transactions[j].category.type=="Gasto"){
+              this.expense = this.expense + this.all_transactions[j].value;
             }
-            if(elem[i].category.type=="Ingreso"){
-              this.income = this.income + elem[i].value 
+            if(this.all_transactions[j].category.type=="Ingreso"){
+              this.income = this.income + this.all_transactions[j].value 
             }
           }
-        });
+        }
       }    
     }
     if(this.selected_time=="Mensual"){ 
-      this.service.getTransactionsByMonth(month,year).subscribe(elem => {
-        this.service.all_transactions_this_month = elem;
-        for(var i=0; i<elem.length;i++){
-          if(elem[i].category.type=="Gasto"){
-            this.expense = this.expense + elem[i].value 
+      for(var j=0; j<this.all_transactions.length; j++){
+        if(this.all_transactions[j].month==month && this.all_transactions[j].year==year){
+          if(this.all_transactions[j].category.type=="Gasto"){
+            this.expense = this.expense + this.all_transactions[j].value;
           }
-          if(elem[i].category.type=="Ingreso"){
-            this.income = this.income + elem[i].value 
+          if(this.all_transactions[j].category.type=="Ingreso"){
+            this.income = this.income + this.all_transactions[j].value 
           }
         }
-      });
+      }
     }
     if(this.selected_time=="Trimestral"){ 
       if(month<=3){
         for (var i=1; i<4; i++){
-          this.service.getTransactionsByMonth(i,year).subscribe(elem => {
-            for(var i=0; i<elem.length;i++){
-              if(elem[i].category.type=="Gasto"){
-                this.expense = this.expense + elem[i].value 
+          for(var j=0; j<this.all_transactions.length; j++){
+            if(this.all_transactions[j].month==i && this.all_transactions[j].year==year){
+              if(this.all_transactions[j].category.type=="Gasto"){
+                this.expense = this.expense + this.all_transactions[j].value;
               }
-              if(elem[i].category.type=="Ingreso"){
-                this.income = this.income + elem[i].value 
+              if(this.all_transactions[j].category.type=="Ingreso"){
+                this.income = this.income + this.all_transactions[j].value 
               }
             }
-          });
+          }
         }
 
       }else if(month>3 && month<=6){
         for (var i=4; i<7; i++){
-          this.service.getTransactionsByMonth(i, year).subscribe(elem => {
-            for(var i=0; i<elem.length;i++){
-              if(elem[i].category.type=="Gasto"){
-                this.expense = this.expense + elem[i].value 
+          for(var j=0; j<this.all_transactions.length; j++){
+            if(this.all_transactions[j].month==i && this.all_transactions[j].year==year){
+              if(this.all_transactions[j].category.type=="Gasto"){
+                this.expense = this.expense + this.all_transactions[j].value;
               }
-              if(elem[i].category.type=="Ingreso"){
-                this.income = this.income + elem[i].value 
+              if(this.all_transactions[j].category.type=="Ingreso"){
+                this.income = this.income + this.all_transactions[j].value 
               }
             }
-          });
+          }
         }
       }else if(month>6 && month<=9){
         for (var i=7; i<10; i++){
-          this.service.getTransactionsByMonth(i,year).subscribe(elem => {
-            for(var i=0; i<elem.length;i++){
-              if(elem[i].category.type=="Gasto"){
-                this.expense = this.expense + elem[i].value 
+          for(var j=0; j<this.all_transactions.length; j++){
+            if(this.all_transactions[j].month==i && this.all_transactions[j].year==year){
+              if(this.all_transactions[j].category.type=="Gasto"){
+                this.expense = this.expense + this.all_transactions[j].value;
               }
-              if(elem[i].category.type=="Ingreso"){
-                this.income = this.income + elem[i].value 
+              if(this.all_transactions[j].category.type=="Ingreso"){
+                this.income = this.income + this.all_transactions[j].value 
               }
             }
-          });
+          }
         }
       }else if(month>9){
         for (var i=10; i<12; i++){
-          this.service.getTransactionsByMonth(i,year).subscribe(elem => {
-            for(var i=0; i<elem.length;i++){
-              if(elem[i].category.type=="Gasto"){
-                this.expense = this.expense + elem[i].value 
+          for(var j=0; j<this.all_transactions.length; j++){
+            if(this.all_transactions[j].month==i && this.all_transactions[j].year==year){
+              if(this.all_transactions[j].category.type=="Gasto"){
+                this.expense = this.expense + this.all_transactions[j].value;
               }
-              if(elem[i].category.type=="Ingreso"){
-                this.income = this.income + elem[i].value 
+              if(this.all_transactions[j].category.type=="Ingreso"){
+                this.income = this.income + this.all_transactions[j].value 
               }
             }
-          });
+          }
         }
       }
       
     }
     if(this.selected_time=="Anual"){
-      this.service.getTransactionsByYear(year).subscribe(elem => {
-        for(var i=0; i<elem.length;i++){
-          if(elem[i].category.type=="Gasto"){
-            this.expense = this.expense + elem[i].value 
+      for(var j=0; j<this.all_transactions.length; j++){
+        if(this.all_transactions[j].year==year){
+          if(this.all_transactions[j].category.type=="Gasto"){
+            this.expense = this.expense + this.all_transactions[j].value;
           }
-          if(elem[i].category.type=="Ingreso"){
-            this.income = this.income + elem[i].value 
+          if(this.all_transactions[j].category.type=="Ingreso"){
+            this.income = this.income + this.all_transactions[j].value 
           }
         }
-      });
+      }
+    }
+    this.healthy = ((this.income - this.expense)/this.income)*100;
+    this.healthy = Math.round(this.healthy);
+    if(this.healthy<=0){
+      this.healthy = 0;
+      document.getElementById("healthy-value").style.color = "#FF0000";
+      return;
+    }else if(this.healthy<7.5){
+      document.getElementById("healthy-value").style.color = "#FF3600";
+      return;
+    }else if(this.healthy<12.5){
+      document.getElementById("healthy-value").style.color = "#FF8300";
+      return;
+    }else if(this.healthy<20){
+      document.getElementById("healthy-value").style.color = "#FFC900";
+      return;
+    }else if(this.healthy<27.5){
+      document.getElementById("healthy-value").style.color = "#EFE800";
+      return;
+    }else if(this.healthy<=35){
+      document.getElementById("healthy-value").style.color = "#8BFF00";
+      return;
+    }else if(this.healthy>35){
+      document.getElementById("healthy-value").style.color = "green";
+      return;
     }
   }
 
