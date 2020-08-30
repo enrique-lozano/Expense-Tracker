@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>anual-expense-income</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <canvas #barChart style="margin-top: 2%;"></canvas>
+
+  <ion-item class="year-selector" lines="full">
+    <ion-button slot="start"  (click)="reduceYear()">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-label style="text-align: center;"><h1>{{selected_year}}</h1></ion-label>
+    <ion-button slot="end" (click)="addYear()">
+      <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>   
+    </ion-button>
+  </ion-item>
+
+</ion-content>

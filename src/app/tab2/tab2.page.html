@@ -15,7 +15,7 @@
   <ion-grid class="intro" fixed="true">
     <ion-row>
       <ion-col class="saldo">
-        Saldo en todas las cuentas
+        {{all_months[month-1]}}, {{year}}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -36,9 +36,7 @@
   </ion-grid>
 </ion-header>
 
-<ion-content>
-
-
+<ion-content class="container">
   <ion-grid class="grid-transactions">
     <ion-row *ngFor="let trans of all_transactions; let i=index" [@fadeInOut]>
       <ion-col class="ion-align-self-center" size="2" (click)="doClick(i)">

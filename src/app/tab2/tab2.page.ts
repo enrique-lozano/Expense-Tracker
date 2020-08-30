@@ -29,6 +29,7 @@ export class Tab2Page{
   private expense: number = 0;
   public year:number;
   public month:number;
+  public all_months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
   constructor(private service:DatabaseService, public actionSheetController: ActionSheetController, public pickerCtrl:PickerController) {  }
 
