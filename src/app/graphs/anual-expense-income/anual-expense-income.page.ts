@@ -62,12 +62,16 @@ export class AnualExpenseIncomePage {
         ]
       },
       options: {
+        responsive: true,
         scales: {
           xAxes: [{
             stacked: true,
             ticks: {
               fontSize: 14
-            }
+            },
+            gridLines: {
+              display: false,
+            },
           }],
           yAxes: [{
               stacked: true,

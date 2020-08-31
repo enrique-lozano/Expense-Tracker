@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button icon="arrow-back-outline"></ion-back-button>
     </ion-buttons>
-    <ion-title>anual-expense-income</ion-title>
+    <ion-title>mensual-categories</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
 
   <canvas #barChart style="margin-top: 2%;"></canvas>
 
-  <ion-item class="year-selector" lines="full">
+  <ion-item class="selector" lines="full">
     <ion-button slot="start"  (click)="reduceYear()">
       <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
     </ion-button>
@@ -19,6 +19,22 @@
     <ion-button slot="end" (click)="addYear()">
       <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>   
     </ion-button>
+  </ion-item>
+  <ion-item class="selector" lines="full">
+    <ion-button slot="start"  (click)="reduceMonth()">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-label style="text-align: center;"><h1>{{months[selected_month-1]}}</h1></ion-label>
+    <ion-button slot="end" (click)="addMonth()">
+      <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>   
+    </ion-button>
+  </ion-item>
+  <ion-item class="selector">
+    <ion-label><h1>Seleccionar tipo</h1></ion-label>
+    <ion-select value="expense" [(ngModel)]="type" (ionChange)="optionsFn()">
+      <ion-select-option value="income">Ingreso</ion-select-option>
+      <ion-select-option value="expense">Gasto</ion-select-option>
+    </ion-select>
   </ion-item>
 
 </ion-content>
