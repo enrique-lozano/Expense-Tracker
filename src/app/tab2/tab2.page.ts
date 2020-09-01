@@ -33,22 +33,14 @@ export class Tab2Page{
 
   constructor(private service:DatabaseService, public actionSheetController: ActionSheetController, public pickerCtrl:PickerController) {  }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.year = new Date().getFullYear();
-    this.month = new Date().getMonth() + 1; 
-    if(this.service.all_transactions_this_month.length==0){
-      this.service.getTransactionsByMonth(this.month, this.year).subscribe(elem => {
-        this.service.all_transactions_this_month = elem;
-        this.all_transactions = elem;
-        this.all_transactions.sort(this.compareTime);
-        this.getIncomeAndExpense();
-        for (var i=0; i<this.all_transactions.length; i++){
-          this.clicked.push(false);
-        }
-      });
-    }else{
-      this.all_transactions = this.service.all_transactions_this_month;
-      this.getIncomeAndExpense();
+    this.month = new Date().getMonth() + 1;
+    this.all_transactions = this.service.getTransactionsByMonth(this.month, this.year);
+    this.all_transactions.sort(this.compareTime);
+    this.getIncomeAndExpense();
+    for (var i=0; i<this.all_transactions.length; i++){
+      this.clicked.push(false);
     }
   }
 
@@ -124,6 +116,11 @@ export class Tab2Page{
       this.clicked[i] = false;
     }
     this.service.removeTransaction(id);
+    for (var i=0; i<this.all_transactions.length; i++){
+      if(id == this.all_transactions[i].id){
+        this.all_transactions.splice(i,1);
+      }
+    }
   }
 
   async selectOrder() {
@@ -187,14 +184,20 @@ export class Tab2Page{
     picker.onDidDismiss().then(async data => {
       let _month = await (await picker.getColumn('month')).selectedIndex;
       let _year = await (await picker.getColumn('year')).selectedIndex;
-      this.service.getTransactionsByMonth(_month+1, this.year-_year).subscribe(elem => {
+      /*this.service.getTransactionsByMonth(_month+1, this.year-_year).subscribe(elem => {
         this.all_transactions = elem;
         this.all_transactions.sort(this.compareTime);
         this.getIncomeAndExpense();
         for (var i=0; i<this.all_transactions.length; i++){
           this.clicked.push(false);
         }
-      });
+      });*/
+      this.all_transactions = this.service.getTransactionsByMonth(_month+1, this.year-_year);
+      this.all_transactions.sort(this.compareTime);
+      this.getIncomeAndExpense();
+      for (var i=0; i<this.all_transactions.length; i++){
+        this.clicked.push(false);
+      }
     });
   }
 

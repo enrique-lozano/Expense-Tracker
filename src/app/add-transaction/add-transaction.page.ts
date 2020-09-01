@@ -88,7 +88,7 @@ export class AddTransactionPage implements OnInit {
       }
     }
     this.service.createTransaction(this.selectedCategory,this.selectedAccount,Number(this.value), this.date, this.note);
-    this.go('tabs/tab2');
+    this.go('tabs/tab1');
   }
 
   setGreen(){

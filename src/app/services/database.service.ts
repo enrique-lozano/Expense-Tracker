@@ -138,26 +138,37 @@ export class DatabaseService {
     return this.transactions.valueChanges(); 
   }
 
-  public getTransactionsByYear(year: number):Observable<Transaction[]>{
-    console.log("Reading transactions (by year)");
-    return this.db.collection<Transaction>("transactions",res => res.where('year', '==', year)).valueChanges();
+  public getTransactionsByYear(year: number):Transaction[]{
+    var result: Transaction[] = [];
+    for (var i=0; i<this.all_transactions.length; i++){
+      if(this.all_transactions[i].year == year){
+        result.push(this.all_transactions[i]);
+      }
+    }
+    return result;
+    //return this.db.collection<Transaction>("transactions",res => res.where('year', '==', year)).valueChanges();
   }
 
-  public getTransactionsByMonth(month: number, year: number):Observable<Transaction[]>{
-    console.log("Reading transactions (by month)");/*
+  public getTransactionsByMonth(month: number, year: number):Transaction[]{
     var result: Transaction[] = [];
     for (var i=0; i<this.all_transactions.length; i++){
       if(this.all_transactions[i].month == month && this.all_transactions[i].year == year){
         result.push(this.all_transactions[i]);
       }
     }
-    return result;*/
-    return this.db.collection<Transaction>("transactions",res => res.where('month', '==', month).where('year','==',year)).valueChanges();
+    return result;
+    //return this.db.collection<Transaction>("transactions",res => res.where('month', '==', month).where('year','==',year)).valueChanges();
   }
 
-  public getTransactionsByDay(day: number, month: number, year: number):Observable<Transaction[]>{
-    console.log("Reading transactions (by day)");
-    return this.db.collection<Transaction>("transactions",res => res.where('day', '==', day).where('year','==',year).where('month','==',month)).valueChanges();
+  public getTransactionsByDay(day: number, month: number, year: number):Transaction[]{
+    var result: Transaction[] = [];
+    for (var i=0; i<this.all_transactions.length; i++){
+      if(this.all_transactions[i].month == month && this.all_transactions[i].year == year &&  this.all_transactions[i].day == day){
+        result.push(this.all_transactions[i]);
+      }
+    }
+    return result;
+    //return this.db.collection<Transaction>("transactions",res => res.where('day', '==', day).where('year','==',year).where('month','==',month)).valueChanges();
   }
 
   public createTransaction(category: string, account: string, value: number, date:string, note:string){
@@ -188,7 +199,9 @@ export class DatabaseService {
           day: day,
           note: note,
           id: transaction_id  //ID-> Primary key
-        };   
+        };  
+        this.all_transactions.push(new_transaction);
+        console.log("Create transaction with id:", transaction_id); 
         return this.transactions.doc(transaction_id).set(new_transaction);
         });
       
