@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Anual-categories</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div>
+    <ion-icon size="large" name="{{selected_icon}}"></ion-icon>
+    <h1 class="category-title">{{selected_category}}</h1>
+  </div>
+        
+  <canvas #barChart style="margin-top: 2%;"></canvas>
+
+  <ion-item class="year-selector" lines="full">
+    <ion-button slot="start"  (click)="reduceYear()">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-label style="text-align: center;"><h1>{{selected_year}}</h1></ion-label>
+    <ion-button slot="end" (click)="addYear()">
+      <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>   
+    </ion-button>
+  </ion-item>
+  <ion-item *ngIf="type=='expense'">
+    <ion-label><h1>Seleccionar categoria</h1></ion-label>
+    <ion-select [(ngModel)]="selected_category" (ionChange)="optionsFn()">
+      <ion-select-option *ngFor="let category of all_categories_expense">{{category.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="type=='income'">
+    <ion-label><h1>Seleccionar categoria</h1></ion-label>
+    <ion-select [(ngModel)]="selected_category" (ionChange)="optionsFn()">
+      <ion-select-option *ngFor="let category of all_categories_income">{{category.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label><h1>Seleccionar tipo</h1></ion-label>
+    <ion-select value="expense" [(ngModel)]="type" (ionChange)="optionsFn()">
+      <ion-select-option value="income">Ingreso</ion-select-option>
+      <ion-select-option value="expense">Gasto</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>

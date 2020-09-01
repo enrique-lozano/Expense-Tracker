@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'mensual-categories',
     loadChildren: () => import('./graphs/mensual-categories/mensual-categories.module').then( m => m.MensualCategoriesPageModule)
+  },
+  {
+    path: 'anual-categories',
+    loadChildren: () => import('./graphs/anual-categories/anual-categories.module').then( m => m.AnualCategoriesPageModule)
   }
 ];
 @NgModule({

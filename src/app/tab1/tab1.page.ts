@@ -30,6 +30,7 @@ export class Tab1Page {
       console.log(elem.initial_balance);
     });
     */
+   console.log("eyyy")
     if(this.service.all_accounts.length==0){
       this.service.getAccounts().subscribe(elem => {
         this.service.all_accounts = elem;

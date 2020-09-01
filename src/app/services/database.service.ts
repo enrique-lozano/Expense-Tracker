@@ -144,7 +144,14 @@ export class DatabaseService {
   }
 
   public getTransactionsByMonth(month: number, year: number):Observable<Transaction[]>{
-    console.log("Reading transactions (by month)");
+    console.log("Reading transactions (by month)");/*
+    var result: Transaction[] = [];
+    for (var i=0; i<this.all_transactions.length; i++){
+      if(this.all_transactions[i].month == month && this.all_transactions[i].year == year){
+        result.push(this.all_transactions[i]);
+      }
+    }
+    return result;*/
     return this.db.collection<Transaction>("transactions",res => res.where('month', '==', month).where('year','==',year)).valueChanges();
   }
 
