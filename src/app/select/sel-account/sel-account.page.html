@@ -5,8 +5,8 @@
     </ion-buttons>
     <ion-title>Cuentas</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="cog-outline"></ion-icon>
+      <ion-button (click)="go('edit-accounts')">
+        <ion-icon slot="icon-only" name="options-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -14,7 +14,7 @@
 
 <ion-content>
 
-  <ion-item *ngFor="let account of all_accounts" (click)="goAndSelect('add-transaction', account)" class="account">
+  <ion-item style="margin-top: 1%;" *ngFor="let account of all_accounts" (click)="goAndSelect('add-transaction', account)" class="account">
     <ion-avatar slot="start">
       <ion-icon size="large" name="{{account.icon}}"></ion-icon>
     </ion-avatar>

@@ -130,13 +130,33 @@ export class AnualCategoriesPage {
     });
   }
 
-  optionsFn(){
+  optionsFn1(){
+    this.getMonthsData(this.all_transactions);
+    this.bars.data.datasets[0].backgroundColor = this.barColor; 
+    this.bars.data.datasets[0].borderColor = this.barColor; 
+    this.bars.data.datasets[0].data = this.data;
+    for(var i=0; i<this.all_categories_income.length; i++){
+      if(this.all_categories_income[i].name == this.selected_category){
+        this.selected_icon = this.all_categories_income[i].icon
+      }
+    }
+    for(var i=0; i<this.all_categories_expense.length; i++){
+      if(this.all_categories_expense[i].name == this.selected_category){
+        this.selected_icon = this.all_categories_expense[i].icon
+      }
+    }
+    this.bars.update();
+  }
+
+  optionsFn2(){
     if(this.type=="income"){
       this.selected_category = this.all_categories_income[0].name;
+      this.selected_icon = this.all_categories_income[0].icon;
       this.barColor = '#0DDB26';
     }
     if(this.type=="expense"){
       this.selected_category = this.all_categories_expense[0].name;
+      this.selected_icon = this.all_categories_expense[0].icon;
       this.barColor = '#FF1B00';
     }
     this.getMonthsData(this.all_transactions);

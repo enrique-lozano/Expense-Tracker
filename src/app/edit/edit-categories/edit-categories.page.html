@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar categorias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-toolbar>
+    <ion-segment value="2">
+      <ion-segment-button value="1" (click)="toIncome()">
+        <ion-label>Ingreso</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2" (click)="toExpense()">
+        <ion-label>Gasto</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-item *ngFor="let category of categories" (click)="goAndSelect('edit-one-category', category)">
+    <ion-avatar slot="start">
+      <ion-icon size="large" name="{{category.icon}}"></ion-icon>
+    </ion-avatar>
+    <ion-label>
+      <h3>{{category.name}}</h3>
+      <p>{{category.type}}</p>
+    </ion-label>
+  </ion-item>
+
+    <!-- fab placed to the bottom end -->
+    <ion-fab (click)="go('add-category')" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="primary">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+</ion-content>

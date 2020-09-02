@@ -11,10 +11,6 @@ const routes: Routes = [
     loadChildren: () => import('./add-transaction/add-transaction.module').then( m => m.AddTransactionPageModule)
   },
   {
-    path: 'sel-category',
-    loadChildren: () => import('./select/sel-category/sel-category.module').then( m => m.SelCategoryPageModule)
-  },
-  {
     path: 'sel-account',
     loadChildren: () => import('./select/sel-account/sel-account.module').then( m => m.SelAccountPageModule)
   },
@@ -37,6 +33,34 @@ const routes: Routes = [
   {
     path: 'anual-categories',
     loadChildren: () => import('./graphs/anual-categories/anual-categories.module').then( m => m.AnualCategoriesPageModule)
+  },
+  {
+    path: 'options',
+    loadChildren: () => import('./options/options.module').then( m => m.OptionsPageModule)
+  },
+  {
+    path: 'edit-categories',
+    loadChildren: () => import('./edit/edit-categories/edit-categories.module').then( m => m.EditCategoriesPageModule)
+  },
+  {
+    path: 'edit-accounts',
+    loadChildren: () => import('./edit/edit-accounts/edit-accounts.module').then( m => m.EditAccountsPageModule)
+  },
+  {
+    path: 'add-account',
+    loadChildren: () => import('./add-account/add-account.module').then( m => m.AddAccountPageModule)
+  },
+  {
+    path: 'add-category',
+    loadChildren: () => import('./add-category/add-category.module').then( m => m.AddCategoryPageModule)
+  },
+  {
+    path: 'edit-one-account',
+    loadChildren: () => import('./edit/edit-one-account/edit-one-account.module').then( m => m.EditOneAccountPageModule)
+  },
+  {
+    path: 'edit-one-category',
+    loadChildren: () => import('./edit/edit-one-category/edit-one-category.module').then( m => m.EditOneCategoryPageModule)
   }
 ];
 @NgModule({

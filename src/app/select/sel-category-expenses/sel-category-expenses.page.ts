@@ -41,6 +41,9 @@ export class SelCategoryExpensesPage implements OnInit {
     this.service.selectedCategory=category;
     this.router.navigate([url]);
   }
-
+  
+  go(url:string){
+    this.router.navigate([url]);
+  }
 
 }

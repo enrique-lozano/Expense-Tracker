@@ -20,7 +20,8 @@ export class DatabaseService {
   public all_categories_expenses:Category[] = [];
   public all_categories_incomes:Category[] = [];
   public all_transactions:Transaction[] = [];
-  public all_transactions_this_month:Transaction[] = [];
+  public all_icons:string[] = ["card","cash","wallet","pricetag","pricetags"]; //For accounts
+  public all_iconsC:string[] = ["card","cash","wallet","pricetag","pricetags","pizza"]; //For categories
 
   constructor(private db: AngularFirestore) {
     this.accounts=this.db.collection('accounts');
@@ -56,14 +57,26 @@ export class DatabaseService {
       balance: initial_balance,
       icon: icon
     };
+    this.all_accounts.push(new_account);
+    console.log("Create account: ", name);
     return this.accounts.doc(name).set(new_account);  //Name->Primary Key (ID)
   }  
 
   public createAccount2(data: Account){
     return this.accounts.add(data);
   }
+
+  public editAccount(id: string, new_balance: number, new_icon: string){
+    return this.accounts.doc(id).update({name: id, balance: new_balance, icon: new_icon})
+  }
   
   public removeAccount(id: string){ 
+    console.log("Account removed: ", id);
+    for (var i=0; i<this.all_accounts.length; i++){
+      if(this.selectedAccount.name == this.all_accounts[i].name){
+        this.all_accounts.splice(i,1);
+      }
+    }
     this.getTransactions().subscribe(elem =>{
       for (var i=0; i<elem.length; i++){
         if (elem[i].account.name==id){
@@ -104,6 +117,13 @@ export class DatabaseService {
       type: type,
       type2: type2,
     };
+    this.all_categories.push(new_category);
+    if(type=="Ingreso"){
+      this.all_categories_incomes.push(new_category);
+    }if(type=="Gasto"){
+      this.all_categories_expenses.push(new_category);
+    }
+    console.log("Create account: ", name);
     return this.categories.doc(name).set(new_category); //Name->Primary Key (ID)
   }  
 

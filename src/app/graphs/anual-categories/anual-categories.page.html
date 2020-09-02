@@ -28,19 +28,19 @@
   </ion-item>
   <ion-item *ngIf="type=='expense'">
     <ion-label><h1>Seleccionar categoria</h1></ion-label>
-    <ion-select [(ngModel)]="selected_category" (ionChange)="optionsFn()">
+    <ion-select [(ngModel)]="selected_category" (ionChange)="optionsFn1()">
       <ion-select-option *ngFor="let category of all_categories_expense">{{category.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item *ngIf="type=='income'">
     <ion-label><h1>Seleccionar categoria</h1></ion-label>
-    <ion-select [(ngModel)]="selected_category" (ionChange)="optionsFn()">
+    <ion-select [(ngModel)]="selected_category" (ionChange)="optionsFn1()">
       <ion-select-option *ngFor="let category of all_categories_income">{{category.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label><h1>Seleccionar tipo</h1></ion-label>
-    <ion-select value="expense" [(ngModel)]="type" (ionChange)="optionsFn()">
+    <ion-select value="expense" [(ngModel)]="type" (ionChange)="optionsFn2()">
       <ion-select-option value="income">Ingreso</ion-select-option>
       <ion-select-option value="expense">Gasto</ion-select-option>
     </ion-select>

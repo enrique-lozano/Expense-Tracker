@@ -38,6 +38,7 @@ export class Tab1Page {
       });  
     }else{
       this.all_accounts = this.service.all_accounts;
+      this.getBalance();
     }
 
     if(this.service.all_transactions.length==0){
@@ -48,8 +49,15 @@ export class Tab1Page {
       });  
     }else{
       this.all_transactions = this.service.all_transactions;
+      this.getIncomeAndExpense();
     }
 
+  }
+
+  ionViewDidEnter(){
+    this.all_transactions = this.service.all_transactions;
+    this.all_accounts = this.service.all_accounts;
+    this.getBalance();
   }
 
   doRefresh(event) {
@@ -63,7 +71,6 @@ export class Tab1Page {
     */
    
     this.resetBalance();
-    this.getIncomeAndExpense();
     this.service.getTransactions().subscribe(elem => {
       this.service.all_transactions = elem;
       this.all_transactions = this.service.all_transactions;
@@ -200,6 +207,9 @@ export class Tab1Page {
       }
     }
     this.healthy = ((this.income - this.expense)/this.income)*100;
+    if(this.income==0 && this.expense==0){
+      this.healthy = 0;
+    }
     this.healthy = Math.round(this.healthy);
     if(this.healthy<=0){
       this.healthy = 0;

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SelCategoryPageRoutingModule } from './sel-category-routing.module';
+import { EditOneCategoryPageRoutingModule } from './edit-one-category-routing.module';
 
-import { SelCategoryPage } from './sel-category.page';
+import { EditOneCategoryPage } from './edit-one-category.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SelCategoryPageRoutingModule
+    EditOneCategoryPageRoutingModule
   ],
-  declarations: [SelCategoryPage]
+  declarations: [EditOneCategoryPage]
 })
-export class SelCategoryPageModule {}
+export class EditOneCategoryPageModule {}

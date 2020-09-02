@@ -4,12 +4,12 @@ import { Account } from '../../services/interfaces';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sel-account',
-  templateUrl: './sel-account.page.html',
-  styleUrls: ['./sel-account.page.scss'],
+  selector: 'app-edit-accounts',
+  templateUrl: './edit-accounts.page.html',
+  styleUrls: ['./edit-accounts.page.scss'],
 })
-export class SelAccountPage implements OnInit {
-
+export class EditAccountsPage implements OnInit {
+  
   private all_accounts: Account[];
 
   constructor(private service:DatabaseService, private router: Router) { }
@@ -45,5 +45,4 @@ export class SelAccountPage implements OnInit {
   go(url:string){
     this.router.navigate([url]);
   }
-
 }

@@ -40,5 +40,8 @@ export class SelCategoryIncomePage implements OnInit {
     this.router.navigate([url]);
   }
 
+  go(url:string){
+    this.router.navigate([url]);
+  }
 
 }

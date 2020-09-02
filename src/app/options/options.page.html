@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajustes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item (click)="go('edit-accounts')">
+    <ion-label class="text">Editar cuentas</ion-label>
+  </ion-item>
+  <ion-item (click)="go('edit-categories')">
+    <ion-label class="text">Editar categorias</ion-label>
+  </ion-item>
+
+</ion-content>

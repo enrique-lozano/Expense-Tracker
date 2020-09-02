@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Añadir Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form>
+    <div class="group">      
+      <input type="text" name="name" required [(ngModel)]="name">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Name</label>
+    </div>
+    <div class="group">      
+      <input type="number" name="name" required [(ngModel)]="initial_balance">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Initial balance</label>
+    </div>
+    <ion-grid class="selector-container">
+      <ion-row>
+        <ion-col size="10">
+          <ion-item class="selector">
+            <ion-label>Icon</ion-label>
+            <ion-select value="0" name="icon" [(ngModel)]="icon">
+              <ion-select-option *ngFor="let icon of all_icons; let i=index" value="{{i}}">{{icon}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col class="ion-align-self-center">
+          <ion-icon color="primary" class="icon" name="{{all_icons[icon]}}" size="large"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>   
+
+  </form>
+
+  <ion-button expand="block" color="secondary" (click)="add_account()" class="button">Añadir cuenta</ion-button>
+
+</ion-content>
