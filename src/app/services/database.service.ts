@@ -228,6 +228,18 @@ export class DatabaseService {
     var year = Number(date.split("-",4)[0]);
     var month = Number(date.split("-",4)[1]);
     var day = Number(date.split("-",4)[2]);
+    if(category==""){
+      y =
+      {
+        name: "Transfer",
+        icon: "code-working",
+        parent: "",
+        type: "",
+        type2: "",
+      };
+      this.createTransfer(y,value,year,month,day)
+      return;
+    }
     this.getAccount(account).then(acc =>{
       x = acc;
       this.getCategory(category).then(cat =>{
@@ -266,16 +278,28 @@ export class DatabaseService {
   public removeTransaction(id: string){
     this.getTransaction(id).then((elem) => {
       this.getAccount(elem.account.name).then(acc =>{
-        this.getCategory(elem.category.name).then(cat =>{
-          if(cat.type=="Ingreso"){
-            var new_balance = acc.balance - elem.value;
-            this.accounts.doc(acc.name).update({balance: new_balance});
-          }else if(cat.type=="Gasto"){
-            var new_balance = acc.balance + elem.value;
-            this.accounts.doc(acc.name).update({balance: new_balance});
-          }
-          this.transactions.doc(id).delete();
-        });
+        if(elem.category.name!="Transfer"){
+          this.getCategory(elem.category.name).then(cat =>{
+            if(cat.type=="Ingreso"){
+              var new_balance = acc.balance - elem.value;
+              this.accounts.doc(acc.name).update({balance: new_balance});
+            }else if(cat.type=="Gasto"){
+              var new_balance = acc.balance + elem.value;
+              this.accounts.doc(acc.name).update({balance: new_balance});
+            }
+            this.transactions.doc(id).delete();
+          });
+        }if(elem.category.name=="Transfer"){ //In transfer we do not have categories
+          var new_balance = acc.balance + elem.value;
+          this.accounts.doc(acc.name).update({balance: new_balance});
+          var name2 = elem.note.split(" a ", 2)[1];
+          console.log(name2);
+          this.getAccount(name2).then(acc2 =>{
+            var new_balance2 = acc2.balance - elem.value;
+            this.accounts.doc(acc2.name).update({balance: new_balance2});
+            this.transactions.doc(id).delete();
+          });
+        }
       });
     });
   }
@@ -286,6 +310,33 @@ export class DatabaseService {
         this.transactions.doc(elem[i].id).delete();
       }
     })
+  }
+
+  public createTransfer(category: Category, value: number, year:number, month:number, day:number){
+    this.getAccount(this.selectedAccount.name).then(acc =>{
+      this.getAccount(this.selectedAccount2.name).then(acc2 =>{
+        var note = "De " + this.selectedAccount.name + " a " + this.selectedAccount2.name;
+        var transaction_id = this.db.createId();
+        var new_transaction: Transaction =
+        {
+          category: category,
+          account: acc,
+          value: value,
+          year: year,
+          month: month,
+          day: day,
+          note: note,
+          id: transaction_id  //ID-> Primary key
+        };  
+        var new_balance = acc.balance - value;
+        var new_balance2 = acc2.balance + value;
+        this.accounts.doc(acc.name).update({balance: new_balance});
+        this.accounts.doc(acc2.name).update({balance: new_balance2});
+        this.all_transactions.push(new_transaction);
+        console.log("Create transfer with id:", transaction_id); 
+        return this.transactions.doc(transaction_id).set(new_transaction);
+      });
+    });
   }
 
 

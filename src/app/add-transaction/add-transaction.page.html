@@ -46,9 +46,9 @@
         <ion-col *ngIf="type=='Transfer'" class="choose ion-align-self-center" size="2">
           <span class="choose-title">-></span>
         </ion-col>
-        <ion-col *ngIf="type=='Transfer'" class="choose ion-align-self-center" (click)="go('sel-account')">
+        <ion-col *ngIf="type=='Transfer'" class="choose ion-align-self-center" (click)="go('sel-account-transfers')">
           <span class="choose-title">Cuenta</span><br>
-          <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
+          <span *ngIf="selectedAccount2!=''">{{selectedAccount2}}</span>
         </ion-col>
       </ion-row>
     </ion-grid>

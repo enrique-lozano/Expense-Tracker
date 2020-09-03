@@ -61,6 +61,10 @@ const routes: Routes = [
   {
     path: 'edit-one-category',
     loadChildren: () => import('./edit/edit-one-category/edit-one-category.module').then( m => m.EditOneCategoryPageModule)
+  },
+  {
+    path: 'sel-account-transfers',
+    loadChildren: () => import('./select/sel-account-transfers/sel-account-transfers.module').then( m => m.SelAccountTransfersPageModule)
   }
 ];
 @NgModule({

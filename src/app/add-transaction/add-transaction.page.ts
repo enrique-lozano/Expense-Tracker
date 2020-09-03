@@ -14,10 +14,13 @@ export class AddTransactionPage implements OnInit {
 
   ngOnInit() {
     this.setRed();
+    console.log(this.service.selectedAccount);
+    console.log(this.service.selectedAccount2);
   }
   
   public selectedCategory:string = 'Seleccionar';
   public selectedAccount:string = 'Seleccionar';
+  public selectedAccount2:string = 'Seleccionar';
   public date:string = '';
   public note:string = '';
   public type:string = '';
@@ -31,6 +34,8 @@ export class AddTransactionPage implements OnInit {
     }if(this.service.selectedCategory == undefined && this.service.selectedAccount != undefined){
       this.selectedAccount = this.service.selectedAccount.name;
       return;
+    }if(this.service.selectedAccount2 != undefined){
+      this.selectedAccount2 = this.service.selectedAccount2.name;
     }
     this.selectedCategory = this.service.selectedCategory.name;
     this.selectedAccount = this.service.selectedAccount.name;
@@ -74,9 +79,6 @@ export class AddTransactionPage implements OnInit {
   }
 
   createTransaction(){
-    if(this.type=='Transfer'){
-      return;
-    }
     if(this.date==''){ //ONLY IF DATE IS NOT SELECTED BY THE USER
       var year = new Date().getFullYear();
       var date = new Date().getDate();
@@ -89,6 +91,11 @@ export class AddTransactionPage implements OnInit {
       }if (date<10 && month<10){
         this.date = year + '-0' + month + '-0' + date;
       }
+    }
+    if(this.type=='Transfer'){
+      this.service.createTransaction("",this.selectedAccount,Number(this.value), this.date, this.note);
+      this.go('tabs/tab1');
+      return;
     }
     if(this.selectedAccount == 'Seleccionar' && this.service.all_accounts.length==1){
       this.selectedAccount = this.service.all_accounts[0].name;
@@ -121,7 +128,7 @@ export class AddTransactionPage implements OnInit {
   async openAlert(){
     const alert = await this.alertCtrl.create({
       header: 'Error',
-      message: 'Selecciona una caetgoria y una cuenta antes de continuar',
+      message: 'Selecciona una categoria y una cuenta antes de continuar',
       buttons: [
         {
           text: 'Acetar'
