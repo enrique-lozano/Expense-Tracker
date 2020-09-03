@@ -12,14 +12,14 @@
   <form>
     <ion-item class="selector" style="margin-bottom: 5%; margin-top: 10%;">
       <ion-label>Tipo</ion-label>
-      <ion-select value="Gasto" name="icon" [(ngModel)]="type">
+      <ion-select value="{{type}}" name="type" [(ngModel)]="type" (ionChange)="selectType()">
         <ion-select-option value="Ingreso">Ingreso</ion-select-option>
         <ion-select-option value="Gasto">Gasto</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item class="selector" style="margin-bottom: 5%;">
       <ion-label>Naturaleza</ion-label>
-      <ion-select value="1" name="icon" [(ngModel)]="type2">
+      <ion-select value="1" name="type2" [(ngModel)]="type2" (ionChange)="selectType()">
         <ion-select-option value="1">1</ion-select-option>
         <ion-select-option value="2">2</ion-select-option>
       </ion-select>
@@ -29,7 +29,7 @@
         <ion-col size="10">
           <ion-item class="selector">
             <ion-label>Icon</ion-label>
-            <ion-select value="{{icon}}" name="icon" [(ngModel)]="icon">
+            <ion-select value="{{icon}}" name="icon" [(ngModel)]="icon" (ionChange)="selectType()">
               <ion-select-option *ngFor="let icon of all_icons; let i=index" value="{{i}}">{{icon}}</ion-select-option>
             </ion-select>
           </ion-item>
@@ -42,8 +42,8 @@
 
   </form>
 
-  <ion-button expand="block" color="primary" (click)="edit_account()" class="buttons first-button">Confirmar cambios</ion-button>
-  <ion-button expand="block" color="secondary" (click)="openAlert()" class="buttons">Eliminar cuenta</ion-button>
+  <ion-button expand="block" color="primary" (click)="edit_category()" class="buttons first-button">Confirmar cambios</ion-button>
+  <ion-button expand="block" color="secondary" (click)="openAlert()" class="buttons">Eliminar categoria</ion-button>
 
 
 </ion-content>

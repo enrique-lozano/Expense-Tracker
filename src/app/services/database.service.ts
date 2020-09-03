@@ -72,11 +72,13 @@ export class DatabaseService {
   
   public removeAccount(id: string){ 
     console.log("Account removed: ", id);
-    for (var i=0; i<this.all_accounts.length; i++){
-      if(this.selectedAccount.name == this.all_accounts[i].name){
-        this.all_accounts.splice(i,1);
+    if(this.selectedAccount!=undefined){
+      for (var i=0; i<this.all_accounts.length; i++){
+        if(this.selectedAccount.name == this.all_accounts[i].name){
+          this.all_accounts.splice(i,1);
+        }
       }
-    }
+    } 
     this.getTransactions().subscribe(elem =>{
       for (var i=0; i<elem.length; i++){
         if (elem[i].account.name==id){
@@ -123,15 +125,37 @@ export class DatabaseService {
     }if(type=="Gasto"){
       this.all_categories_expenses.push(new_category);
     }
-    console.log("Create account: ", name);
+    console.log("Create category: ", name);
     return this.categories.doc(name).set(new_category); //Name->Primary Key (ID)
   }  
 
   public createCategory2(data: Category){
     return this.categories.add(data);
   }
+
+  public editCategory(id: string, new_type: string, new_type2: string,new_icon: string){
+    return this.categories.doc(id).update({name: id, type: new_type, type2: new_type2, icon: new_icon})
+  }
   
   public removeCategory(id: string){
+    console.log("Category removed: ", id);
+    if(this.selectedAccount!=undefined){
+      for (var i=0; i<this.all_categories.length; i++){
+        if(this.selectedCategory.name == this.all_categories[i].name){
+          this.all_categories.splice(i,1);
+        }
+      }
+      for (var i=0; i<this.all_categories_expenses.length; i++){
+        if(this.selectedCategory.name == this.all_categories_expenses[i].name){
+          this.all_categories_expenses.splice(i,1);
+        }
+      }
+      for (var i=0; i<this.all_categories_incomes.length; i++){
+        if(this.selectedCategory.name == this.all_categories_incomes[i].name){
+          this.all_categories_incomes.splice(i,1);
+        }
+      }
+    }
     this.getTransactions().subscribe(elem =>{
       for (var i=0; i<elem.length; i++){
         if (elem[i].category.name==id){

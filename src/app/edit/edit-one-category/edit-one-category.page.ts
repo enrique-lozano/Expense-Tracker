@@ -18,7 +18,11 @@ export class EditOneCategoryPage implements OnInit {
   constructor(private router: Router, private service:DatabaseService, public alertCtrl: AlertController) { }
 
   ngOnInit() {
-    this.all_icons=this.service.all_icons;
+    this.all_icons=this.service.all_iconsC;
+    this.all_icons.sort(this.compare);
+    this.service.all_iconsC = this.all_icons;
+    this.type = this.service.selectedCategory.type;
+    this.type2 = this.service.selectedCategory.type2;
     for(var i=0; i<this.all_icons.length;i++){
       if(this.all_icons[i] == this.service.selectedCategory.icon){
         this.icon = i;
@@ -26,10 +30,24 @@ export class EditOneCategoryPage implements OnInit {
     }
   }
 
+  compare(a,b){
+    if ( a < b ){
+      return -1;
+    }
+    if ( a > b ){
+      return 1;
+    }
+    return 0;
+  }
+
+  selectType(){
+    console.log("Selection done");
+  }
+
+
   edit_category(){
-    
-    //this.service.editAccount(this.service.selectedAccount.name, this.balance, this.all_icons[this.icon]);
-    //this.go('tabs/tab1');
+    this.service.editCategory(this.service.selectedCategory.name, this.type, this.type2, this.all_icons[this.icon]);
+    this.go('tabs/tab1');
   }
 
   async openAlert(){
@@ -46,8 +64,8 @@ export class EditOneCategoryPage implements OnInit {
         {
           text: 'Si, acepto',
           handler: data => {
-            //this.service.removeAccount(this.service.selectedAccount.name);
-            //this.go('tabs/tab1');
+            this.service.removeCategory(this.service.selectedCategory.name);
+            this.go('tabs/tab1');
           }
         }
       ]
