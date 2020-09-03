@@ -4,11 +4,23 @@ import { DatabaseService } from '../services/database.service'
 import { Account, Category, Transaction } from '../services/interfaces'
 import { Router } from '@angular/router';
 import { ActionSheetController } from '@ionic/angular';
+import {style, state, animate, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        //style({height:"0"}),
+        //animate(50, style({opacity:1})) 
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(200, style({height:"0", opacity:0})) 
+      ])
+    ])
+  ]
 })
 export class Tab1Page {
 
@@ -19,6 +31,7 @@ export class Tab1Page {
   private all_transactions: Transaction[];
   private selected_time: string = "Mensual";
   private healthy: number = 0;
+  public fab = true; // Fab button visible or not
 
   constructor(private service:DatabaseService, private router: Router, public actionSheetController: ActionSheetController){
   }
@@ -272,6 +285,16 @@ export class Tab1Page {
     });
 
     await actionSheet.present();
+  }
+
+  lastY:any;
+  logScrolling(event){
+    if(event.detail.scrollTop > Math.max(0,this.lastY)){
+      this.fab = false;
+    }else{
+      this.fab = true;
+    }
+    this.lastY = event.detail.scrollTop;
   }
 
 

@@ -100,7 +100,7 @@
   </ion-card>
 
     <!-- fab placed to the bottom end -->
-    <ion-fab (click)="go('add-transaction')" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab [@fadeInOut] *ngIf="fab" (click)="go('add-transaction')" vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button color="primary">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button><!--

@@ -4,6 +4,7 @@ import { Transaction } from '../services/interfaces';
 import {style, state, animate, transition, trigger} from '@angular/animations';
 import { ActionSheetController, PickerController } from '@ionic/angular';
 import { PickerOptions} from '@ionic/core'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -13,7 +14,7 @@ import { PickerOptions} from '@ionic/core'
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
         //style({height:"0"}),
-        //animate(50, style({opacity:1, height:"auto"})) 
+        //animate(50, style({opacity:1})) 
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
         animate(200, style({height:"0", opacity:0})) 
@@ -30,8 +31,9 @@ export class Tab2Page{
   public year:number;
   public month:number;
   public all_months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+  public fab = true; // Fab button visible or not
 
-  constructor(private service:DatabaseService, public actionSheetController: ActionSheetController, public pickerCtrl:PickerController) {  }
+  constructor(private service:DatabaseService, private router: Router, public actionSheetController: ActionSheetController, public pickerCtrl:PickerController) {  }
 
   ionViewDidEnter() {
     this.year = new Date().getFullYear();
@@ -199,6 +201,21 @@ export class Tab2Page{
         this.clicked.push(false);
       }
     });
+  }
+
+  lastY:any;
+  logScrolling(event){
+    if(event.detail.scrollTop > Math.max(0,this.lastY)){
+      this.fab = false;
+    }else{
+      this.fab = true;
+    }
+    this.lastY = event.detail.scrollTop;
+  }
+
+  
+  go(url:string){
+    this.router.navigate([url]);
   }
 
 }

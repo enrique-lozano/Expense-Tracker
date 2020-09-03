@@ -36,7 +36,7 @@
   </ion-grid>
 </ion-header>
 
-<ion-content class="container">
+<ion-content class="container" [scrollEvents]="true"  (ionScroll)="logScrolling($event)">
   <ion-grid class="grid-transactions">
     <ion-row *ngFor="let trans of all_transactions; let i=index" [@fadeInOut]>
       <ion-col class="ion-align-self-center" size="2" (click)="doClick(i)">
@@ -64,3 +64,10 @@
 
   </ion-grid>
 </ion-content>
+
+<!-- fab placed to the bottom end -->
+<ion-fab [@fadeInOut] *ngIf="fab" (click)="go('add-transaction')" vertical="bottom" horizontal="end">
+  <ion-fab-button color="primary">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
