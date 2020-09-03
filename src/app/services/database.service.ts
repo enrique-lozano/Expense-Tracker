@@ -20,8 +20,15 @@ export class DatabaseService {
   public all_categories_expenses:Category[] = [];
   public all_categories_incomes:Category[] = [];
   public all_transactions:Transaction[] = [];
+
+  public selectedAccount2:Account;
+
   public all_icons:string[] = ["card","cash","wallet","pricetag","pricetags"]; //For accounts
-  public all_iconsC:string[] = ["card","cash","wallet","pricetag","pricetags","pizza"]; //For categories
+
+  public all_iconsC:string[] = ["card","cash","wallet","pricetag","pricetags","pizza","planet",
+"airplane", "alarm", "american-football", "barbell", "bandage","basketball","basket","baseball","bicycle","beer",
+"boat", "body","bed","book","build","call","car","desktop","fast-food","gift","game-controller","happy","home",
+"male-female", "man", "trophy","woman","subway","school", "mail","key","heart","cafe"]; //For categories
 
   constructor(private db: AngularFirestore) {
     this.accounts=this.db.collection('accounts');
@@ -280,5 +287,6 @@ export class DatabaseService {
       }
     })
   }
+
 
 }

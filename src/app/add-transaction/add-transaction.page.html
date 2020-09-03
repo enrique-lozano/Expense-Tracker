@@ -43,8 +43,11 @@
           <span class="choose-title">Categoria</span><br>
           <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
         </ion-col>
+        <ion-col *ngIf="type=='Transfer'" class="choose ion-align-self-center" size="2">
+          <span class="choose-title">-></span>
+        </ion-col>
         <ion-col *ngIf="type=='Transfer'" class="choose ion-align-self-center" (click)="go('sel-account')">
-          <span class="choose-title">Categoria</span><br>
+          <span class="choose-title">Cuenta</span><br>
           <span *ngIf="selectedCategory!=''">{{selectedCategory}}</span>
         </ion-col>
       </ion-row>

@@ -74,6 +74,9 @@ export class AddTransactionPage implements OnInit {
   }
 
   createTransaction(){
+    if(this.type=='Transfer'){
+      return;
+    }
     if(this.date==''){ //ONLY IF DATE IS NOT SELECTED BY THE USER
       var year = new Date().getFullYear();
       var date = new Date().getDate();
@@ -87,6 +90,12 @@ export class AddTransactionPage implements OnInit {
         this.date = year + '-0' + month + '-0' + date;
       }
     }
+    if(this.selectedAccount == 'Seleccionar' && this.service.all_accounts.length==1){
+      this.selectedAccount = this.service.all_accounts[0].name;
+    }else if((this.selectedAccount == 'Seleccionar' && this.service.all_accounts.length>1) || this.selectedCategory == 'Seleccionar'){
+      this.openAlert();
+      return;
+    }
     this.service.createTransaction(this.selectedCategory,this.selectedAccount,Number(this.value), this.date, this.note);
     this.go('tabs/tab1');
   }
@@ -94,17 +103,32 @@ export class AddTransactionPage implements OnInit {
   setGreen(){
     this.sign='+';
     this.type='Ingreso';
+    this.selectedCategory = 'Seleccionar';
     document.getElementById("top").setAttribute("class","back-green ")
   }
   setRed(){
     this.sign='-';
     this.type='Gasto';
+    this.selectedCategory='Seleccionar';
     document.getElementById("top").setAttribute("class","back-red ")
   }
   setBlue(){
     this.sign='';
     this.type='Transfer';
     document.getElementById("top").setAttribute("class","back-blue ")
+  }
+
+  async openAlert(){
+    const alert = await this.alertCtrl.create({
+      header: 'Error',
+      message: 'Selecciona una caetgoria y una cuenta antes de continuar',
+      buttons: [
+        {
+          text: 'Acetar'
+        }
+      ]
+    });
+    await alert.present();
   }
 
   async openNote(){
