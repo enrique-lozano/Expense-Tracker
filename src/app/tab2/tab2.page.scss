@@ -14,6 +14,12 @@ ion-col{
     --ion-background-color:#e5e5e5;
 }
 
+.search{
+    --ion-background-color:white;
+    --border-radius: 12px;
+    padding: 3% 2%;
+}
+
 h2{
     color: #282828;
 }
@@ -52,6 +58,10 @@ h2{
 }
 .value-income{
     color: green;
+}
+
+.value-transfer{
+    color: blue;
 }
 
 /*

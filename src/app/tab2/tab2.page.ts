@@ -105,6 +105,27 @@ export class Tab2Page{
     }
   }
 
+  isItemAvailable = false;
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.all_transactions = this.service.getTransactionsByMonth(this.month, this.year);
+    this.all_transactions.sort(this.compareTime);
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() !== '') {
+        this.isItemAvailable = true;
+        this.all_transactions = this.all_transactions.filter((item) => {
+            return (item.category.name.toLowerCase().indexOf(val.toLowerCase()) > -1 || 
+            item.note.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        })
+    } else {
+        this.isItemAvailable = false;
+    }
+}
+
   doClick(i:number){
     this.clicked[i] = !this.clicked[i];
   }
@@ -194,7 +215,9 @@ export class Tab2Page{
           this.clicked.push(false);
         }
       });*/
-      this.all_transactions = this.service.getTransactionsByMonth(_month+1, this.year-_year);
+      this.month = _month+1;
+      this.year = new Date().getFullYear() - _year
+      this.all_transactions = this.service.getTransactionsByMonth(this.month, this.year);
       this.all_transactions.sort(this.compareTime);
       this.getIncomeAndExpense();
       for (var i=0; i<this.all_transactions.length; i++){

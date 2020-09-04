@@ -234,7 +234,7 @@ export class DatabaseService {
         name: "Transfer",
         icon: "code-working",
         parent: "",
-        type: "",
+        type: "Transfer",
         type2: "",
       };
       this.createTransfer(y,value,year,month,day)
@@ -262,7 +262,7 @@ export class DatabaseService {
           day: day,
           note: note,
           id: transaction_id  //ID-> Primary key
-        };  
+        };
         this.all_transactions.push(new_transaction);
         console.log("Create transaction with id:", transaction_id); 
         return this.transactions.doc(transaction_id).set(new_transaction);

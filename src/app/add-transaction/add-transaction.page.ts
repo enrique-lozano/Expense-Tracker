@@ -14,8 +14,6 @@ export class AddTransactionPage implements OnInit {
 
   ngOnInit() {
     this.setRed();
-    console.log(this.service.selectedAccount);
-    console.log(this.service.selectedAccount2);
   }
   
   public selectedCategory:string = 'Seleccionar';
@@ -26,6 +24,9 @@ export class AddTransactionPage implements OnInit {
   public type:string = '';
 
   ionViewDidEnter(){
+    if(this.service.selectedAccount2 != undefined){
+      this.selectedAccount2 = this.service.selectedAccount2.name;
+    }
     if(this.service.selectedCategory == undefined && this.service.selectedAccount == undefined){
       return;
     }if(this.service.selectedCategory != undefined && this.service.selectedAccount == undefined){
@@ -34,8 +35,6 @@ export class AddTransactionPage implements OnInit {
     }if(this.service.selectedCategory == undefined && this.service.selectedAccount != undefined){
       this.selectedAccount = this.service.selectedAccount.name;
       return;
-    }if(this.service.selectedAccount2 != undefined){
-      this.selectedAccount2 = this.service.selectedAccount2.name;
     }
     this.selectedCategory = this.service.selectedCategory.name;
     this.selectedAccount = this.service.selectedAccount.name;
@@ -94,7 +93,7 @@ export class AddTransactionPage implements OnInit {
     }
     if(this.type=='Transfer'){
       this.service.createTransaction("",this.selectedAccount,Number(this.value), this.date, this.note);
-      this.go('tabs/tab1');
+      this.go('tabs/tab2');
       return;
     }
     if(this.selectedAccount == 'Seleccionar' && this.service.all_accounts.length==1){
@@ -105,6 +104,12 @@ export class AddTransactionPage implements OnInit {
     }
     this.service.createTransaction(this.selectedCategory,this.selectedAccount,Number(this.value), this.date, this.note);
     this.go('tabs/tab1');
+    /*
+    setTimeout(() => {
+      console.log('Async refreshing operation has ended');
+      this.go('tabs/tab2');
+    }, 300);
+    */
   }
 
   setGreen(){

@@ -37,6 +37,7 @@
 </ion-header>
 
 <ion-content class="container" [scrollEvents]="true"  (ionScroll)="logScrolling($event)">
+  <ion-searchbar animated class="search" type="text" debounce="300" (ionChange)="getItems($event)"></ion-searchbar>
   <ion-grid class="grid-transactions">
     <ion-row *ngFor="let trans of all_transactions; let i=index" [@fadeInOut]>
       <ion-col class="ion-align-self-center" size="2" (click)="doClick(i)">
@@ -49,7 +50,7 @@
       <ion-col class="ion-align-self-center" style="text-align: right;" (click)="doClick(i)">
         <h2 *ngIf="trans.category.type=='Gasto'" class="value-expense">{{trans.value}}</h2>
         <h2 *ngIf="trans.category.type=='Ingreso'" class="value-income">{{trans.value}}</h2>
-        <h2 *ngIf="trans.category.type=='Transfer'">{{trans.value}}</h2>
+        <h2 *ngIf="trans.category.type=='Transfer'" class="value-transfer">{{trans.value}}</h2>
         <span>{{trans.day}}-{{trans.month}}-{{trans.year}}</span>
       </ion-col>
       <div *ngIf="clicked[i]" [@fadeInOut] style="width: 100%; text-align: center; padding-bottom: 2%;">
