@@ -9,11 +9,11 @@ import { DatabaseService } from '../services/database.service';
 })
 export class AddCategoryPage implements OnInit {
   
-  private name:string;
-  private icon:number = 0; //Index in the all_icons array
-  private type:string;
-  private type2:string;
-  private all_icons;
+  public name:string;
+  public icon:number = 0; //Index in the all_icons array
+  public type:string;
+  public type2:string;
+  public all_icons;
 
   constructor(private router: Router, private service:DatabaseService) { }
 

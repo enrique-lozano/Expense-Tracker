@@ -15,11 +15,11 @@ export class AnualExpenseIncomePage {
 
   bars: any;
   colorArray: any;
-  private all_transactions: Transaction[];
-  private data_income: number[] = [];
-  private data_expense: number[] = [];
-  private data_balance: number[] = [];
-  private selected_year: number;
+  public all_transactions: Transaction[];
+  public data_income: number[] = [];
+  public data_expense: number[] = [];
+  public data_balance: number[] = [];
+  public selected_year: number;
 
   constructor(private service:DatabaseService) { }
 

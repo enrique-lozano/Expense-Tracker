@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sel-category-income.page.scss'],
 })
 export class SelCategoryIncomePage implements OnInit {
-  private all_categories: Category[];
+  public all_categories: Category[];
 
   constructor(private service:DatabaseService, private router: Router) { }
 

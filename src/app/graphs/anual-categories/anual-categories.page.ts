@@ -13,15 +13,15 @@ export class AnualCategoriesPage {
   @ViewChild('barChart') barChart;
 
   bars: any;
-  private all_transactions: Transaction[] = [];
-  private all_categories_income: Category[] = [];
-  private all_categories_expense: Category[] = [];
-  private data: number[] = [];
-  private selected_year: number;
-  private selected_category: string;
-  private selected_icon: string;
-  private type = "expense";
-  private barColor = '#FF1B00';
+  public all_transactions: Transaction[] = [];
+  public all_categories_income: Category[] = [];
+  public all_categories_expense: Category[] = [];
+  public data: number[] = [];
+  public selected_year: number;
+  public selected_category: string;
+  public selected_icon: string;
+  public type = "expense";
+  public barColor = '#FF1B00';
 
   constructor(private service:DatabaseService) { }
 

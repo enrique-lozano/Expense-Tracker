@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SelCategoryExpensesPage implements OnInit {
   
-  private all_categories: Category[];
+  public all_categories: Category[];
 
   constructor(private service:DatabaseService, private router: Router) { }
 

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SelAccountPage implements OnInit {
 
-  private all_accounts: Account[];
+  public all_accounts: Account[];
 
   constructor(private service:DatabaseService, private router: Router) { }
 

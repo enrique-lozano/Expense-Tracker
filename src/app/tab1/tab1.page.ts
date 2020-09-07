@@ -24,13 +24,13 @@ import {style, state, animate, transition, trigger} from '@angular/animations';
 })
 export class Tab1Page {
 
-  private balance: number = 0;
-  private income: number = 0;
-  private expense: number = 0;
-  private all_accounts: Account[];
-  private all_transactions: Transaction[];
-  private selected_time: string = "Mensual";
-  private healthy: number = 0;
+  public balance: number = 0;
+  public income: number = 0;
+  public expense: number = 0;
+  public all_accounts: Account[];
+  public all_transactions: Transaction[];
+  public selected_time: string = "Mensual";
+  public healthy: number = 0;
   public fab = true; // Fab button visible or not
 
   constructor(private service:DatabaseService, private router: Router, public actionSheetController: ActionSheetController){

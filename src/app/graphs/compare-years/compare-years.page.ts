@@ -15,12 +15,12 @@ export class CompareYearsPage {
 
   bars: any;
   colorArray: string[] = ['#FF0000','#FF8F00','#F7FF00'];
-  private all_transactions: Transaction[];
-  private data_this_year: number[] = [];
-  private data_prev_year: number[] = [];
-  private data_prev2_year: number[] = [];
-  private selected_year: number;
-  private type = "expense";
+  public all_transactions: Transaction[];
+  public data_this_year: number[] = [];
+  public data_prev_year: number[] = [];
+  public data_prev2_year: number[] = [];
+  public selected_year: number;
+  public type = "expense";
 
   constructor(private service:DatabaseService) { }
 

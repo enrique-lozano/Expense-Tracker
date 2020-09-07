@@ -24,10 +24,10 @@ import { Router } from '@angular/router';
 })
 export class Tab2Page{
 
-  private all_transactions: Transaction[];
-  private clicked: boolean[] = []; //Array to show the option buttons in each transaction
-  private income: number = 0;
-  private expense: number = 0;
+  public all_transactions: Transaction[];
+  public clicked: boolean[] = []; //Array to show the option buttons in each transaction
+  public income: number = 0;
+  public expense: number = 0;
   public year:number;
   public month:number;
   public all_months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]

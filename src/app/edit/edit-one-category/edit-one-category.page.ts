@@ -10,10 +10,10 @@ import { AlertController } from '@ionic/angular';
 })
 export class EditOneCategoryPage implements OnInit {
 
-  private type:string;
-  private type2:string;
-  private icon:number; //Index in the all_icons array
-  private all_icons:string[];
+  public type:string;
+  public type2:string;
+  public icon:number; //Index in the all_icons array
+  public all_icons:string[];
 
   constructor(private router: Router, private service:DatabaseService, public alertCtrl: AlertController) { }
 

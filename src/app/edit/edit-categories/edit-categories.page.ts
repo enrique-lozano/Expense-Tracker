@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class EditCategoriesPage implements OnInit {
 
-  private categories: Category[];
+  public categories: Category[];
 
   constructor(private service:DatabaseService, private router: Router) { }
 

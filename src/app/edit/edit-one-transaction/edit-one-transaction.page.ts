@@ -11,9 +11,9 @@ import { Category } from 'src/app/services/interfaces';
 })
 export class EditOneTransactionPage implements OnInit {
 
-  private note:string = '';
-  private date:string = '';
-  private value:number = 0;
+  public note:string = '';
+  public date:string = '';
+  public value:number = 0;
 
   constructor(private router: Router, private service:DatabaseService, public alertCtrl: AlertController) { }
 

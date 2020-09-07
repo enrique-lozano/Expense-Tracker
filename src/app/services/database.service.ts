@@ -7,7 +7,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseService { 
+export class DatabaseService {
 
   private accounts:AngularFirestoreCollection<Account>;
   private categories:AngularFirestoreCollection<Category>;

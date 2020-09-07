@@ -10,9 +10,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class EditOneAccountPage implements OnInit {
 
-  private balance:number = 0;
-  private icon:number; //Index in the all_icons array
-  private all_icons:string[];
+  public balance:number = 0;
+  public icon:number; //Index in the all_icons array
+  public all_icons:string[];
 
   constructor(private router: Router, private service:DatabaseService, public alertCtrl: AlertController) { }
 

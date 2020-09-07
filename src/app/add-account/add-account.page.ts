@@ -9,10 +9,10 @@ import { DatabaseService } from '../services/database.service';
 })
 export class AddAccountPage implements OnInit {
 
-  private name:string;
-  private initial_balance:number;
-  private icon:number = 0; //Index in the all_icons array
-  private all_icons;
+  public name:string;
+  public initial_balance:number;
+  public icon:number = 0; //Index in the all_icons array
+  public all_icons;
 
   constructor(private router: Router, private service:DatabaseService) { }
 

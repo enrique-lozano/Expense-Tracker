@@ -14,16 +14,16 @@ export class MensualCategoriesPage {
   @ViewChild('barChart') barChart;
 
   bars: any;
-  private all_transactions: Transaction[] = [];
-  private all_categories_income: Category[] = [];
-  private all_categories_expense: Category[] = [];
-  private data: number[] = [];
-  private selected_month: number;
-  private selected_year: number;
-  private months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octumbre","Noviembre","Diciembre"]
-  private labels = [];
-  private colors = [];
-  private type = "expense";
+  public all_transactions: Transaction[] = [];
+  public all_categories_income: Category[] = [];
+  public all_categories_expense: Category[] = [];
+  public data: number[] = [];
+  public selected_month: number;
+  public selected_year: number;
+  public months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octumbre","Noviembre","Diciembre"]
+  public labels = [];
+  public colors = [];
+  public type = "expense";
 
   constructor(private service:DatabaseService) { }
 
