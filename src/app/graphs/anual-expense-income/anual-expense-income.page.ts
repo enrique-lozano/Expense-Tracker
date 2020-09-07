@@ -18,6 +18,7 @@ export class AnualExpenseIncomePage {
   private all_transactions: Transaction[];
   private data_income: number[] = [];
   private data_expense: number[] = [];
+  private data_balance: number[] = [];
   private selected_year: number;
 
   constructor(private service:DatabaseService) { }
@@ -46,7 +47,16 @@ export class AnualExpenseIncomePage {
       type: 'bar',
       data: {
         labels: ['EN', 'FE', 'MA', 'AB', 'MY', 'JN', 'JL', 'AG', 'SE', 'OC', 'NO','DI'],
-        datasets: [{
+        datasets: [
+          {
+            type: 'line',
+            label: 'Flujo',
+            data: this.data_balance,
+            backgroundColor: 'rgba(0,0,0,0)', // array should have same number of elements as number of dataset
+            borderColor: 'rgba(0,83,211,0.5)',// array should have same number of elements as number of dataset
+            borderWidth: 3,
+          },
+          {
           label: 'Income',
           data: this.data_income,
           backgroundColor: '#2ECC71', // array should have same number of elements as number of dataset
@@ -58,7 +68,7 @@ export class AnualExpenseIncomePage {
           backgroundColor: '#E74C3C', // array should have same number of elements as number of dataset
           borderColor: '#E74C3C',// array should have same number of elements as number of dataset
           borderWidth: 1
-        }
+        },
         ]
       },
       options: {
@@ -90,6 +100,10 @@ export class AnualExpenseIncomePage {
   }
 
   getMonthsData(transactions: Transaction[]){
+    this.data_income = [];
+    this.data_expense = [];
+    this.data_balance = [];
+    var previus = 0;
     for(var month=1;month<=12;month++){
       var month_data_income = 0;
       var month_data_expense = 0;
@@ -103,27 +117,27 @@ export class AnualExpenseIncomePage {
           }
         }
       }
+      this.data_balance.push(month_data_income+month_data_expense);
+      previus = month_data_income-month_data_expense;
       this.data_income.push(month_data_income);
       this.data_expense.push(month_data_expense);
     }
   }
 
   addYear(){
-    this.data_income = [];
-    this.data_expense = [];
     this.selected_year = this.selected_year + 1;
     this.getMonthsData(this.all_transactions);
-    this.bars.data.datasets[0].data = this.data_income;
-    this.bars.data.datasets[1].data = this.data_expense;  
+    this.bars.data.datasets[0].data = this.data_balance;
+    this.bars.data.datasets[1].data = this.data_income;
+    this.bars.data.datasets[2].data = this.data_expense;  
     this.bars.update();
   }
   reduceYear(){
-    this.data_income = [];
-    this.data_expense = [];
     this.selected_year = this.selected_year - 1;
     this.getMonthsData(this.all_transactions);
-    this.bars.data.datasets[0].data = this.data_income;
-    this.bars.data.datasets[1].data = this.data_expense;  
+    this.bars.data.datasets[0].data = this.data_balance;
+    this.bars.data.datasets[1].data = this.data_income;
+    this.bars.data.datasets[2].data = this.data_expense;  
     this.bars.update();
   }
 

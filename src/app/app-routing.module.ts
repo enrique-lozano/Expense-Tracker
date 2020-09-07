@@ -65,6 +65,14 @@ const routes: Routes = [
   {
     path: 'sel-account-transfers',
     loadChildren: () => import('./select/sel-account-transfers/sel-account-transfers.module').then( m => m.SelAccountTransfersPageModule)
+  },
+  {
+    path: 'edit-one-transaction',
+    loadChildren: () => import('./edit/edit-one-transaction/edit-one-transaction.module').then( m => m.EditOneTransactionPageModule)
+  },
+  {
+    path: 'compare-years',
+    loadChildren: () => import('./graphs/compare-years/compare-years.module').then( m => m.CompareYearsPageModule)
   }
 ];
 @NgModule({

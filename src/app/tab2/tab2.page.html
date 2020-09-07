@@ -37,7 +37,7 @@
 </ion-header>
 
 <ion-content class="container" [scrollEvents]="true"  (ionScroll)="logScrolling($event)">
-  <ion-searchbar animated class="search" type="text" debounce="300" (ionChange)="getItems($event)"></ion-searchbar>
+  <ion-searchbar animated class="search" type="text" debounce="150" (ionChange)="getItems($event)"></ion-searchbar>
   <ion-grid class="grid-transactions">
     <ion-row *ngFor="let trans of all_transactions; let i=index" [@fadeInOut]>
       <ion-col class="ion-align-self-center" size="2" (click)="doClick(i)">
@@ -54,7 +54,7 @@
         <span>{{trans.day}}-{{trans.month}}-{{trans.year}}</span>
       </ion-col>
       <div *ngIf="clicked[i]" [@fadeInOut] style="width: 100%; text-align: center; padding-bottom: 2%;">
-        <div style="width: 45%; display: inline-block;" (click)="editTransaction(trans.id)">
+        <div style="width: 45%; display: inline-block;" (click)="editTransaction(trans)">
           <ion-button expand="block" class="edit-button">Editar</ion-button>
         </div>
         <div style="width: 45%;display: inline-block;" (click)="deleteTransaction(trans.id)">

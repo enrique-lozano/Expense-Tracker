@@ -90,10 +90,10 @@ export class AddTransactionPage implements OnInit {
       }if (date<10 && month<10){
         this.date = year + '-0' + month + '-0' + date;
       }
-    }
+    } 
     if(this.type=='Transfer'){
       this.service.createTransaction("",this.selectedAccount,Number(this.value), this.date, this.note);
-      this.go('tabs/tab2');
+      this.go('tabs/tab1');
       return;
     }
     if(this.selectedAccount == 'Seleccionar' && this.service.all_accounts.length==1){

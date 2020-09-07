@@ -15,6 +15,7 @@ export class DatabaseService {
 
   public selectedCategory:Category;
   public selectedAccount:Account;
+  public transactionToEdit:Transaction;
   public all_accounts:Account[] = [];
   public all_categories:Category[] = [];
   public all_categories_expenses:Category[] = [];
@@ -187,6 +188,27 @@ export class DatabaseService {
   public getTransactions():Observable<Transaction[]>{
     console.log("Reading transactions");
     return this.transactions.valueChanges(); 
+  }
+
+  public editTransaction(id: string, new_note: string, new_value: number, new_date:string){
+    this.getTransaction(id).then(elem =>{
+      this.getAccount(elem.account.name).then(acc =>{
+        if(elem.category.type=="Gasto"){
+          var new_balance = acc.balance - (new_value-elem.value)
+        }if(elem.category.type=="Ingreso"){
+          var new_balance = acc.balance + (new_value-elem.value)
+        }
+        this.accounts.doc(acc.name).update({balance: new_balance})
+        if(new_date==''){
+          return this.transactions.doc(id).update({note: new_note, value:new_value})
+        }else{
+          var new_year = Number(new_date.split("-",4)[0]);
+          var new_month = Number(new_date.split("-",4)[1]);
+          var new_day = Number(new_date.split("-",4)[2]); 
+          return this.transactions.doc(id).update({note: new_note, value:new_value, year: new_year, month: new_month, day: new_day})
+        }
+      });
+    });
   }
 
   public getTransactionsByYear(year: number):Transaction[]{

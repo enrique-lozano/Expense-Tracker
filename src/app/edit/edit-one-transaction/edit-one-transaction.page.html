@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Transacción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form>
+    <div class="group">      
+      <input name="note" required [(ngModel)]="note">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Nota</label>
+    </div> 
+    <div class="group">      
+      <input name="value" type="number" required [(ngModel)]="value">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Valor</label>
+    </div> 
+    <div class="group">      
+      <input name="date" type="date" required [(ngModel)]="date">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label></label>
+    </div> 
+  </form>
+
+  <ion-button expand="block" color="primary" (click)="edit_transaction()" class="buttons first-button">Confirmar cambios</ion-button>
+
+</ion-content>
+

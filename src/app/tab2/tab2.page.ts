@@ -92,6 +92,16 @@ export class Tab2Page{
     return 0;
   }
 
+  compareType(a,b){
+    if ( a.category.type < b.category.type ){
+      return -1;
+    }
+    if ( a.category.type > b.category.type){
+      return 1;
+    }
+    return 0;
+  }
+
   getIncomeAndExpense(){
     this.income=0;
     this.expense=0;
@@ -130,8 +140,9 @@ export class Tab2Page{
     this.clicked[i] = !this.clicked[i];
   }
 
-  editTransaction(id:string){
-    console.log("edit:", id)
+  editTransaction(transaction:Transaction){
+    this.service.transactionToEdit = transaction;
+    this.go('edit-one-transaction');
   }
 
   deleteTransaction(id:string){
@@ -144,13 +155,14 @@ export class Tab2Page{
         this.all_transactions.splice(i,1);
       }
     }
+    this.getIncomeAndExpense();
   }
 
   async selectOrder() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Ordenar por',
       buttons: [
-        { text: 'Temporalidad', handler: () => {          
+        { text: 'Fecha', handler: () => {          
             this.all_transactions.sort(this.compareTime);
           }
         },
@@ -160,6 +172,10 @@ export class Tab2Page{
         },
         { text: 'Categoría', handler: () => {          
           this.all_transactions.sort(this.compareCategory);
+          }
+        },   
+        { text: 'Ingreso/Gasto', handler: () => {          
+          this.all_transactions.sort(this.compareType);
         }
       },
       ]
@@ -171,6 +187,11 @@ export class Tab2Page{
   async selectMonth(){
     let opts:PickerOptions = {
       buttons: [
+        {
+          text: 'Confirmar',
+          handler: (value) => {
+          }
+        }
       ],
       columns: [
         {
