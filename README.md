@@ -1,5 +1,5 @@
 # Expense-Tracker 💰💰
-An application made with the ionic framework, whose objective is to help control our expenses and improve the individual economy of each person. 
+This is an application made with the ionic framework, whose objective is to help control our expenses and improve the individual economy of each person. 
 The application will try to be in a near future a multiplatform application, that works in android, ios and in web version.
 
 ## Run it 🚀
