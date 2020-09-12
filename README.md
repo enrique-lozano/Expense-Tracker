@@ -35,13 +35,9 @@ Feel free to contact the developer if you have any questions or suggestions abou
 therefore it is very useful if you want to start in the world of application programming.
 
 # Screenshots
-![Alt text](/screenshots/sc1.jpg?raw=true "Optional Title")
-<img src="/screenshots/sc1.jpg" alt="Vue Expenses Stats" width="100%" />
+<img src="/screenshots/sc1.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+<img src="/screenshots/sc2.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+<img src="/screenshots/sc3.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+<img src="/screenshots/sc4.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+<img src="/screenshots/sc5.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 
-![Alt text](/screenshots/sc2.jpg?raw=true "Optional Title")
-
-![Alt text](/screenshots/sc3.jpg?raw=true "Optional Title")
-
-![Alt text](/screenshots/sc4.jpg?raw=true "Optional Title")
-
-![Alt text](/screenshots/sc5.jpg?raw=true "Optional Title")
