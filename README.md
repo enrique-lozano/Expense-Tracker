@@ -6,7 +6,7 @@ The application will try to be in a near future a multiplatform application, tha
 Just go to the web https://expense-tracker-39c01.web.app/ and that it's! 
 
 This is just a beta version in a web form, in order to check how the application will work on mobile phones. The development process for android or ios has not started, 
-although it is true that the transfer from web version to android or ios should not be very complicated thanks to the ionic framework. At the moment the application is only available in Spanish, although it can be translated easily since most browsers give the automatic option to do so. Support for more languages is a pending task in the app and part of the code is also written in Spanish, so please contact the creator if you have any questions.
+although it is true that the transfer from web version to android or ios should not be very complicated thanks to the ionic framework. __At the moment the application is only available in Spanish, although it can be translated easily since most browsers give the automatic option to do so.__ Support for more languages is a pending task in the app and part of the code is also written in Spanish, so please contact the creator if you have any questions.
 
 __Warning:__ *The app is not responsive design yet, so desktop users will have an ugly view of the app. For a better view go to the config of your browser and select the developer options
 (in Chrome pressing Ctrl+Shift+I) and select your favourite device.*
