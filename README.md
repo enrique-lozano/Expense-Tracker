@@ -36,6 +36,7 @@ therefore it is very useful if you want to start in the world of application pro
 
 # Screenshots
 ![Alt text](/screenshots/sc1.jpg?raw=true "Optional Title")
+<img src="/screenshots/sc1.jpg" alt="Vue Expenses Stats" width="100%" />
 
 ![Alt text](/screenshots/sc2.jpg?raw=true "Optional Title")
 
