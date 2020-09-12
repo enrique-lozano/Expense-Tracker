@@ -11,8 +11,6 @@ although it is true that the transfer from web version to android or ios should 
 __Warning:__ *The app is not responsive design yet, so desktop users will have an ugly view of the app. For a better view go to the config of your browser and select the developer options
 (in Chrome pressing Ctrl+Shift+I) and select your favourite device.*
 
-![<img src="image.png" width="250"/>](/sc1.jpg?raw=true "Optional Title")
-
 ## Where the data is stored? 🔗
 At the moment the data is stored in the creator's personal firebase account, Enriqueloz88. This information is not subject to any type of encryption so storing compromising data is not recommended yet. 
 If appropriate, the transfer to another database will be studied.
@@ -35,3 +33,10 @@ The priority now is to make a user system, preferably stored in firebase (since 
 ## Need help ❓
 Feel free to contact the developer if you have any questions or suggestions about the project or how you can help with it. It is a very simple project made with Ionic, 
 therefore it is very useful if you want to start in the world of application programming.
+
+# Screenshots
+![Alt text](/sc1.jpg?raw=true "Optional Title")
+
+![Alt text](/sc1.jpg?raw=true "Optional Title")
+
+![Alt text](/sc1.jpg?raw=true "Optional Title")
