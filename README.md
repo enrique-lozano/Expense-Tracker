@@ -37,31 +37,31 @@ therefore it is very useful if you want to start in the world of application pro
 
 # Screenshots
 
-__Init Page__
+__Init Page:__
 
 
 <img src="/screenshots/sc1.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 
 
-__Categories evolution__
+__Categories evolution:__
 
 
 <img src="/screenshots/sc2.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 
 
-__Transactions List__
+__Transactions List:__
 
 
 <img src="/screenshots/sc3.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 
 
-__Monthly category balance__
+__Monthly category balance:__
 
 
 <img src="/screenshots/sc4.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 
 
-__Income/Expense graph__
+__Income/Expense graph:__
 
 
 <img src="/screenshots/sc5.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
