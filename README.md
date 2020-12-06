@@ -36,10 +36,14 @@ Feel free to contact the developer if you have any questions or suggestions abou
 therefore it is very useful if you want to start in the world of application programming.
 
 # Screenshots
+__Init Page__
 <img src="/screenshots/sc1.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
----
+__Categories evolution__
 <img src="/screenshots/sc2.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+__Transactions List__
 <img src="/screenshots/sc3.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+__Monthly category balance__
 <img src="/screenshots/sc4.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+__Income/Expense graph__
 <img src="/screenshots/sc5.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 
