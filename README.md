@@ -18,14 +18,15 @@ If appropriate, the transfer to another database will be studied.
 __Warning:__ *Please bear in mind that the free version of the database only supports 50,000 readings per day, so make responsible use of the application until it is optimized for its actual release on the market.*
 
 ## For developers💻
-You will have to install ionic in version 5. To check how to install just refer to https://ionicframework.com/docs/intro/cli. You will also have to add the firebase library for the 
-database storage and the chartjs library to see correctly the graphs in the app. In order to do that just type in your console:
+You will have to install ionic in version 5. To check how to install just refer to https://ionicframework.com/docs/intro/cli. You will also have to add the firebase library for the database storage, the chartjs library to see correctly the graphs, and maybe some other minor dependecies of the app. In order to do that just type in your console:
+
+> npm install
+
+Make sure that you are in the correct directory when you do that. To compile your project just type *ionic serve* in your console in the root directory. If you have any problems running the app, try installing manually some dependencies:
 
 > npm install chart.js --save
 
 > npm install firebase @angular/fire --save
-
-Make sure that you are in the correct directory when you do that. To compile your project just type *ionic serve* in your console in the root directory.
 
 ## Next updates🔜
 The priority now is to make a user system, preferably stored in firebase (since the rest of the database is also stored there). Later and after improvements in visual and performance aspects, an apk could be developed. Please, refer to the projects section (https://github.com/enriqueloz88/Expense-Tracker/projects) if you want to check what to do or how to colaborate and make something cool. Any error in the code or suggestion can be written in the issues section as well (https://github.com/enriqueloz88/Expense-Tracker/issues). This is an open project and everyone is free to collaborate.
