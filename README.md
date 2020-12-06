@@ -37,6 +37,7 @@ therefore it is very useful if you want to start in the world of application pro
 
 # Screenshots
 <img src="/screenshots/sc1.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
+---
 <img src="/screenshots/sc2.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 <img src="/screenshots/sc3.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
 <img src="/screenshots/sc4.jpg" alt="Vue Expenses Stats" width="50%" height="50%" />
