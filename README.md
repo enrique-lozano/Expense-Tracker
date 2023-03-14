@@ -1,3 +1,5 @@
+> :warning: **This project is not maintained, since it was the start of something much bigger, a new application called Monekin ([more info about Monekin here](https://github.com/enrique-lozano/Monekin)). It will remain in read-only mode**
+
 # Expense-Tracker 💰💰
 This is an application made with the ionic framework, whose objective is to help control our expenses and improve the individual economy of each person. 
 The application will try to be in a near future a multiplatform application, that works in android, ios and in web version.
